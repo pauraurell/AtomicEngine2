@@ -580,9 +580,6 @@ Resource* ModuleResources::LoadResource(uint UID, ResourceType type)
 			ret = TextureImporter::Load(buffer, (ResourceTexture*)resource, size);
 			LoadMetaFile(resource);
 			break;
-		case RESOURCE_SHADER:
-			ShaderImporter::Load(buffer, (ResourceShader*)resource);
-			break;
 		case RESOURCE_SCENE:
 			break;
 		case RESOURCE_UNKNOWN:
@@ -602,7 +599,7 @@ Resource* ModuleResources::LoadResource(uint UID, ResourceType type)
 		return nullptr;
 	}
 
-	//resource->name = resources_data[UID].name;
+	resource->name = resources_data[UID].name;
 	RELEASE_ARRAY(buffer);
 
 	return resource;
@@ -701,9 +698,6 @@ Resource* ModuleResources::CreateResource(uint UID, ResourceType type, std::stri
 		break;
 	case RESOURCE_TEXTURE:
 		resource = new ResourceTexture(UID);
-		break;
-	case RESOURCE_SHADER:
-		resource = new ResourceShader(UID);
 		break;
 	case RESOURCE_SCENE:
 		break;
@@ -815,9 +809,6 @@ bool ModuleResources::SaveResource(Resource* resource)
 	case RESOURCE_TEXTURE:
 		size = TextureImporter::Save((ResourceTexture*)resource, &buffer);
 		break;
-	case RESOURCE_SHADER:
-		size = ShaderImporter::Save((ResourceShader*)resource, &buffer);
-		break;
 	case RESOURCE_SCENE:
 		break;
 	default:
@@ -830,7 +821,7 @@ bool ModuleResources::SaveResource(Resource* resource)
 		RELEASE_ARRAY(buffer);
 	}
 
-	if(resource->GetType() == ResourceType::RESOURCE_MODEL || resource->GetType() == ResourceType::RESOURCE_TEXTURE || resource->GetType() == ResourceType::RESOURCE_SHADER)
+	if(resource->GetType() == ResourceType::RESOURCE_MODEL || resource->GetType() == ResourceType::RESOURCE_TEXTURE)
 		ret = SaveMetaFile(resource);
 
 	return ret;
@@ -889,7 +880,7 @@ ResourceType ModuleResources::GetTypeFromPath(const char* path)
 	else if (extension == ".png" || extension == ".tga" || extension == ".dds")
 		return ResourceType::RESOURCE_TEXTURE;
 
-	else if (extension == ".vert" || extension == ".frag" || extension == ".shader")
+	else if (extension == ".vert" || extension == ".frag")
 		return ResourceType::RESOURCE_SHADER;
 
 	else if (extension == ".scene")
@@ -918,8 +909,6 @@ const char* ModuleResources::GenerateLibraryPath(Resource* resource)
 		sprintf_s(library_path, 128, "Library/Materials/%d.material", resource->GetUID()); break;
 	case RESOURCE_TEXTURE:
 		sprintf_s(library_path, 128, "Library/Textures/%d.dds", resource->GetUID()); break;
-	case RESOURCE_SHADER:
-		sprintf_s(library_path, 128, "Library/Shaders/%d.shader", resource->GetUID()); break;
 	case RESOURCE_SCENE:
 		sprintf_s(library_path, 128, "Library/Scenes/%d.scene", resource->GetUID()); break;
 	default:
