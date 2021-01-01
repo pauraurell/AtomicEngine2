@@ -217,13 +217,10 @@ bool WindowAssets::DrawIcon(const char* path, int id, bool isFolder)
 	else
 	{
 		std::string meta_file = App->resources->GenerateMetaFile(path);
-		uint UID = 0;
+		if (!FileSystem::Exists(meta_file.c_str()))
+			return ret;
 
-		if (FileSystem::Exists(meta_file.c_str()))
-			UID = App->resources->GetUIDFromMeta(meta_file.c_str());
-		else
-			UID = App->resources->Find(path);
-
+		uint UID = App->resources->GetUIDFromMeta(meta_file.c_str());
 		ImGui::PushID(UID);
 		std::string file_name = FileSystem::GetFile(path);
 
