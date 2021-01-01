@@ -2,7 +2,6 @@
 #define _WINDOW_SHADER_EDITOR_H_
 
 #include "EditorWindow.h"
-#include "TextEditor/TextEditor.h"
 
 class WindowShaderEditor : public EditorWindow {
 public:
@@ -18,8 +17,6 @@ private:
 
 	char vertexShaderPath[128];
 	char fragmentShaderPath[128];
-
-	TextEditor editor;
 };
 
 #endif // !_WINDOW_SHADER_EDITOR_H_
