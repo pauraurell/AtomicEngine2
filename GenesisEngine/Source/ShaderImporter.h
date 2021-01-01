@@ -4,10 +4,8 @@
 class ResourceShader;
 typedef unsigned int GLuint;
 enum class ShaderType;
-struct Uniform;
 
 #include <string>
-#include <vector>
 
 namespace ShaderImporter 
 {
@@ -15,7 +13,6 @@ namespace ShaderImporter
 	GLuint Compile(char* fileBuffer, ShaderType type);
 	bool ShaderHasError(GLuint shader);
 	void CreateProgram(ResourceShader* shader);
-	void GetUniforms(GLuint program, ResourceShader* shader);
 	std::string FindPairingShader(const char* current_shader_path);
 	ShaderType GetTypeFromPath(const char* path);
 	void RecompileShader(const char* vertexShaderPath, const char* fragmentShaderPath);

@@ -11,14 +11,15 @@ public:
 
 	void Open(const char* assets_file_path);
 	void Draw() override;
-	void DrawEditor(TextEditor& editor, char* path);
 
 private:
+	char vertexShaderBuffer[2048];
+	char fragmentShaderBuffer[2048];
+
 	char vertexShaderPath[128];
 	char fragmentShaderPath[128];
 
-	TextEditor vertexShaderEditor;
-	TextEditor fragmentShaderEditor;
+	TextEditor editor;
 };
 
 #endif // !_WINDOW_SHADER_EDITOR_H_
