@@ -22,28 +22,27 @@ uint ResourceShader::SaveMeta(GnJSONObj& base_object, uint last_modification)
 
 void ResourceShader::OnEditor()
 {
-	ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_DefaultOpen;
-	if (ImGui::CollapsingHeader("Uniforms", flags)) 
+	if (ImGui::CollapsingHeader("Uniforms")) 
 	{
 		const float step = 1.0f;
 		ImGui::Spacing();
-		for (std::map<std::string, Uniform>::iterator it = uniforms.begin(); it != uniforms.end(); it++)
+		for (size_t i = 0; i < uniforms.size(); i++)
 		{
-			switch (it->second.uniformType)
+			switch (uniforms[i].uniformType)
 			{
 			case UniformType::BOOLEAN:
 					break;
 			case UniformType::NUMBER:
-				ImGui::InputScalar(it->first.c_str(), ImGuiDataType_Float, &it->second.number, &step);
+				ImGui::InputScalar(uniforms[i].name, ImGuiDataType_Float, &uniforms[i].number, &step);
 				break;
 			case UniformType::VEC_2:
-				ImGui::InputFloat2(it->first.c_str(), it->second.vec2.ptr());
+				ImGui::InputFloat2(uniforms[i].name, uniforms[i].vec2.ptr());
 				break;
 			case UniformType::VEC_3:
-				ImGui::InputFloat3(it->first.c_str(), it->second.vec3.ptr());
+				ImGui::InputFloat3(uniforms[i].name, uniforms[i].vec3.ptr());
 				break;
 			case UniformType::VEC_4:
-				ImGui::InputFloat4(it->first.c_str(), it->second.vec4.ptr());
+				ImGui::InputFloat4(uniforms[i].name, uniforms[i].vec4.ptr());
 				break;
 			default:
 				break;
@@ -52,8 +51,6 @@ void ResourceShader::OnEditor()
 
 		if (ImGui::Button("Save Uniforms"))
 			App->resources->SaveResource(this);
-
-		ImGui::Spacing();
 	}
 }
 
@@ -61,29 +58,29 @@ uint ResourceShader::Save(GnJSONObj& base_object)
 {
 	GnJSONArray gn_uniforms = base_object.AddArray("uniforms");
 
-	for (std::map<std::string, Uniform>::iterator it = uniforms.begin(); it != uniforms.end(); it++)
+	for (size_t i = 0; i < uniforms.size(); i++)
 	{
 		GnJSONObj uniform;
 
-		uniform.AddInt("type", (int)it->second.uniformType);
-		uniform.AddString("name", it->first.c_str());
+		uniform.AddInt("type", (int)uniforms[i].uniformType);
+		uniform.AddString("name", uniforms[i].name);
 
-		switch (it->second.uniformType)
+		switch (uniforms[i].uniformType)
 		{
 		case UniformType::BOOLEAN:
-			uniform.AddBool("value", it->second.boolean);
+			uniform.AddBool("value", uniforms[i].boolean);
 			break;
 		case UniformType::NUMBER:
-			uniform.AddFloat("value", it->second.number);
+			uniform.AddFloat("value", uniforms[i].number);
 			break;
 		case UniformType::VEC_2:
-			uniform.AddFloat2("value", it->second.vec2);
+			uniform.AddFloat2("value", uniforms[i].vec2);
 			break;
 		case UniformType::VEC_3:
-			uniform.AddFloat3("value", it->second.vec3);
+			uniform.AddFloat3("value", uniforms[i].vec3);
 			break;
 		case UniformType::VEC_4:
-			uniform.AddFloat4("value", it->second.vec4);
+			uniform.AddFloat4("value", uniforms[i].vec4);
 			break;
 		default:
 			break;
@@ -105,35 +102,30 @@ void ResourceShader::Load(GnJSONObj& base_object)
 		GnJSONObj uniform_object = gn_uniforms.GetObjectAt(i);
 
 		uniform.uniformType = (UniformType)uniform_object.GetInt("type");
-		uniform.name = uniform_object.GetString("name", "no_name");
+		strcpy(uniform.name,  uniform_object.GetString("name", "no_name"));
 
 		switch (uniform.uniformType)
 		{
 		case UniformType::BOOLEAN:
-			uniform.type = GL_BOOL;
 			uniform.boolean = uniform_object.GetBool("value");
 			break;
 		case UniformType::NUMBER:
-			uniform.type = GL_FLOAT;
 			uniform.number = uniform_object.GetFloat("value");
 			break;
 		case UniformType::VEC_2:
-			uniform.type = GL_FLOAT_VEC2;
 			uniform.vec2 = uniform_object.GetFloat2("value");
 			break;
 		case UniformType::VEC_3:
-			uniform.type = GL_FLOAT_VEC3;
 			uniform.vec3 = uniform_object.GetFloat3("value");
 			break;
 		case UniformType::VEC_4:
-			uniform.type = GL_FLOAT_VEC4;
 			uniform.vec4 = uniform_object.GetFloat4("value");
 			break;
 		default:
 			break;
 		}
 
-		uniforms[uniform.name] = uniform;
+		uniforms.push_back(uniform);
 	}
 }
 
@@ -149,54 +141,54 @@ void ResourceShader::Use()
 
 void ResourceShader::SetUniforms()
 {
-	for (std::map<std::string, Uniform>::iterator it = uniforms.begin(); it != uniforms.end(); it++)
+	for (size_t i = 0; i < uniforms.size(); i++)
 	{
-		switch (it->second.type)
+		switch (uniforms[i].type)
 		{
 		case GL_BOOL:
-			SetBool(it->first.c_str(), it->second.boolean);
+			SetBool(uniforms[i].name, uniforms[i].boolean);
 			break;
 
 		//FLOAT ======================================================================================
 		case GL_FLOAT:
-			SetFloat(it->first.c_str(), it->second.number);
+			SetFloat(uniforms[i].name, uniforms[i].number);
 			break;
 		case GL_FLOAT_VEC2:
-			SetVec2(it->first.c_str(), it->second.vec2.x, it->second.vec2.y);
+			SetVec2(uniforms[i].name, uniforms[i].vec2.x, uniforms[i].vec2.y);
 			break;
 		case GL_FLOAT_VEC3:
-			SetVec3(it->first.c_str(), it->second.vec3.x, it->second.vec3.y, it->second.vec3.z);
+			SetVec3(uniforms[i].name, uniforms[i].vec3.x, uniforms[i].vec3.y, uniforms[i].vec3.z);
 			break;
 		case GL_FLOAT_VEC4:
-			SetVec4(it->first.c_str(), it->second.vec4.x, it->second.vec4.y, it->second.vec4.z, it->second.vec4.z);
+			SetVec4(uniforms[i].name, uniforms[i].vec4.x, uniforms[i].vec4.y, uniforms[i].vec4.z, uniforms[i].vec4.z);
 			break;
 
 		//INT ======================================================================================
 		case GL_INT:
-			SetInt(it->first.c_str(), it->second.number);
+			SetInt(uniforms[i].name, uniforms[i].number);
 			break;
 		case GL_INT_VEC2:
-			SetVec2(it->first.c_str(), it->second.vec2.x, it->second.vec2.y);
+			SetVec2(uniforms[i].name, uniforms[i].vec2.x, uniforms[i].vec2.y);
 			break;
 		case GL_INT_VEC3:
-			SetVec3(it->first.c_str(), it->second.vec3.x, it->second.vec3.y, it->second.vec3.z);
+			SetVec3(uniforms[i].name, uniforms[i].vec3.x, uniforms[i].vec3.y, uniforms[i].vec3.z);
 			break;
 		case GL_INT_VEC4:
-			SetVec4(it->first.c_str(), it->second.vec4.x, it->second.vec4.y, it->second.vec4.z, it->second.vec4.z);
+			SetVec4(uniforms[i].name, uniforms[i].vec4.x, uniforms[i].vec4.y, uniforms[i].vec4.z, uniforms[i].vec4.z);
 			break;
 
 		//DOUBLE ====================================================================================
 		case GL_DOUBLE:
-			SetFloat(it->first.c_str(), it->second.number);
+			SetFloat(uniforms[i].name, uniforms[i].number);
 			break;
 		case GL_DOUBLE_VEC2:
-			SetVec2(it->first.c_str(), it->second.vec2.x, it->second.vec2.y);
+			SetVec2(uniforms[i].name, uniforms[i].vec2.x, uniforms[i].vec2.y);
 			break;
 		case GL_DOUBLE_VEC3:
-			SetVec3(it->first.c_str(), it->second.vec3.x, it->second.vec3.y, it->second.vec3.z);
+			SetVec3(uniforms[i].name, uniforms[i].vec3.x, uniforms[i].vec3.y, uniforms[i].vec3.z);
 			break;
 		case GL_DOUBLE_VEC4:
-			SetVec4(it->first.c_str(), it->second.vec4.x, it->second.vec4.y, it->second.vec4.z, it->second.vec4.z);
+			SetVec4(uniforms[i].name, uniforms[i].vec4.x, uniforms[i].vec4.y, uniforms[i].vec4.z, uniforms[i].vec4.z);
 			break;
 		default:
 			break;

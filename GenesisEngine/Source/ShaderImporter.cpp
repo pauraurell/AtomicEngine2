@@ -132,13 +132,10 @@ void ShaderImporter::GetUniforms(GLuint program, ResourceShader* shader)
 	{
 		Uniform uniform;
 		GLsizei length;
-		GLchar name[16];
-		glGetActiveUniform(program, (GLuint)i, 16, &length, &uniform.size, &uniform.type, name);
+		glGetActiveUniform(program, (GLuint)i, 16, &length, &uniform.size, &uniform.type, (GLchar*)&uniform.name);
 
-		uniform.name = name;
-
-		if (uniform.name != "model_matrix" && uniform.name != "projection" &&
-			uniform.name != "view" && uniform.name != "time")
+		if (strcmp(uniform.name, "model_matrix") != 0 && strcmp(uniform.name, "projection") 
+			!= 0 && strcmp(uniform.name, "view") != 0 && strcmp(uniform.name, "time") != 0)
 		{
 			if (uniform.type == GL_FLOAT || uniform.type == GL_INT)
 				uniform.uniformType = UniformType::NUMBER;
@@ -161,21 +158,18 @@ void ShaderImporter::GetUniforms(GLuint program, ResourceShader* shader)
 			else 
 				uniform.uniformType = UniformType::UNKNOWN;
 
-			std::map<std::string, Uniform>::iterator it;
-			it = shader->uniforms.find(uniform.name);
-
-			if (it != shader->uniforms.end()) {
-				uniform = shader->uniforms[uniform.name];
+			for (size_t j = 0; j < shader->uniforms.size(); j++)
+			{
+				if (strcmp(shader->uniforms[j].name, uniform.name) == 0)
+					uniform = shader->uniforms[j];
+				
 			}
 			
 			uniforms.push_back(uniform);
 		}
 	}
 
-	for (size_t i = 0; i < uniforms.size(); i++)
-	{
-		shader->uniforms[uniforms[i].name] = uniforms[i];
-	}
+	shader->uniforms = uniforms;
 }
 
 uint ShaderImporter::Save(ResourceShader* shader, char** fileBuffer)
