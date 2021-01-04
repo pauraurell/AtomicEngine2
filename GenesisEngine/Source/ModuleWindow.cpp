@@ -95,9 +95,7 @@ bool ModuleWindow::LoadConfig(GnJSONObj& config)
 {
 	//Get Json attributes
 	width = config.GetInt("width");
-	
 	height = config.GetInt("height");
-
 	fullscreen = config.GetBool("fullscreen");
 	fullscreen_desktop = config.GetBool("fullscreen_desktop");
 	resizable = config.GetBool("resizable");

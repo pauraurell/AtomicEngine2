@@ -16,6 +16,7 @@ Application::Application(int argc, char* args[]) : argc(argc), args(args), want_
 	scene = new ModuleScene(true);
 	editor = new Editor(true);
 	resources = new ModuleResources(true);
+	audio = new ModuleAudio(true);
 
 	// Main Modules
 	AddModule(window);
@@ -24,6 +25,7 @@ Application::Application(int argc, char* args[]) : argc(argc), args(args), want_
 	AddModule(input);
 	AddModule(scene);
 	AddModule(editor);
+	AddModule(audio);
 
 	// Renderer last!
 	AddModule(renderer3D);

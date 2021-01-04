@@ -40,8 +40,13 @@ namespace AK
 	void VirtualFreeHook(void* in_pMemAddress, size_t in_size, DWORD in_dwFreeType);
 }
 
-bool InitSoundEngine();
-void ProcessAudio();
-bool TermSoundEngine();
+namespace ModuleWwise
+{
+	bool InitSoundEngine();
+	void ProcessAudio();
+	bool TermSoundEngine();
+}
+
+
 
 #endif;

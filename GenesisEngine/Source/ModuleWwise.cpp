@@ -49,7 +49,7 @@ namespace AK
 	}
 }
 
-bool InitSoundEngine()
+bool ModuleWwise::InitSoundEngine()
 {
 	//Memory Manager Init
 	{
@@ -154,17 +154,44 @@ bool InitSoundEngine()
 	}
 #endif // AK_OPTIMIZED
 
+	AKRESULT base_path = g_lowLevelIO.SetBasePath(AKTEXT("../Engine/Assets/SoundBanks/"));
+	if (base_path != AK_Success)
+	{
+		LOG("Invalid base path!");
+		return false;
+	}
+
+	AK::StreamMgr::SetCurrentLanguage(AKTEXT("English(US)"));
+	// Load banks synchronously (from file name).
+	AkBankID bankID; // Not used. These banks can be unloaded with their file name.
+
+	/*AKRESULT eResult = AK::SoundEngine::LoadBank("Init.bnk", AK_DEFAULT_POOL_ID, bankID);
+	if (eResult != AK_Success)
+	{
+		LOG("Couldn't init the soundbank!");
+		return false;
+	}*/
+
+	/*assert(eResult == AK_Success);
+	eResult = AK::SoundEngine::LoadBank(BANKNAME_CAR, bankID);
+	assert(eResult == AK_Success);
+	eResult = AK::SoundEngine::LoadBank(BANKNAME_HUMAN, bankID);
+	assert(eResult == AK_Success);
+	eResult = AK::SoundEngine::LoadBank(BANKNAME_MARKERTEST, bankID);
+	assert(eResult == AK_Success);*/
+
+	LOG("Sound Engine Initialized");
 	return true;
 }
 
 
-void ProcessAudio() 
+void ModuleWwise::ProcessAudio()
 {
 	// Process bank requests, events, positions, RTPC, etc.
 	AK::SoundEngine::RenderAudio();
 }
 
-bool TermSoundEngine() 
+bool ModuleWwise::TermSoundEngine()
 {
 #ifndef AK_OPTIMIZED
 	// Terminate Communication Services
