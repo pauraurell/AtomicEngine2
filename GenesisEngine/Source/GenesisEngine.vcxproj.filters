@@ -253,8 +253,9 @@
     </ClCompile>
     <ClCompile Include="ModuleAudio.cpp">
       <Filter>Modules</Filter>
+    <ClCompile Include="Audio.cpp">
+      <Filter>GameObjects &amp; Components</Filter>
     </ClCompile>
-  </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="glmath.h" />
@@ -1091,7 +1092,9 @@
     <ClInclude Include="ModuleAudio.h">
       <Filter>Modules</Filter>
     </ClInclude>
-  </ItemGroup>
+    <ClInclude Include="Audio.h">
+      <Filter>GameObjects &amp; Components</Filter>
+    </ClInclude>
   <ItemGroup>
     <Filter Include="Modules">
       <UniqueIdentifier>{aadabd6e-ecb0-4c15-a947-3d8fe5f67392}</UniqueIdentifier>

@@ -378,6 +378,10 @@ bool Editor::CreateMainMenuBar() {
 			{
 				App->scene->AddGameObject(new GameObject(ComponentType::CAMERA));
 			}
+			else if (ImGui::MenuItem("Audio"))
+			{
+				App->scene->AddGameObject(new GameObject(ComponentType::AUDIO));
+			}
 			ImGui::EndMenu();
 		}
 
