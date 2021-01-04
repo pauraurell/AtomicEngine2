@@ -258,6 +258,9 @@
     <ClCompile Include="AudioListener.cpp">
       <Filter>GameObjects &amp; Components</Filter>
     </ClCompile>
+    <ClCompile Include="AudioReverbZone.cpp">
+      <Filter>GameObjects &amp; Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -1097,6 +1100,9 @@
       <Filter>GameObjects &amp; Components</Filter>
     </ClInclude>
     <ClInclude Include="AudioListener.h">
+      <Filter>GameObjects &amp; Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioReverbZone.h">
       <Filter>GameObjects &amp; Components</Filter>
     </ClInclude>
   </ItemGroup>
