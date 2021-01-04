@@ -10,7 +10,13 @@
 AudioEmitter::AudioEmitter(GameObject* gameObject) : Component(gameObject)
 {
 	type = ComponentType::AUDIO_EMITTER;
-	volume = new float(50.0f);
+	volume = new float(1.0f);
+	mute = false;
+	bypass_reverb_zones = false;
+	play_on_awake = false;
+	loop = false;
+	priority = new int(128);
+	pitch = new float(0.0f);
 }
 
 AudioEmitter::~AudioEmitter()
@@ -44,6 +50,13 @@ void AudioEmitter::OnEditor()
 		ImGui::Separator();
 		ImGui::Spacing();
 		
-		ImGui::DragFloat("Volume", volume, 1, 0, 100);
+		ImGui::Checkbox("Mute", &mute);
+		ImGui::Checkbox("Loop", &loop);
+		ImGui::Checkbox("Bypass Reverb Zones", &bypass_reverb_zones);
+		ImGui::Checkbox("Play on Awake", &play_on_awake);
+
+		ImGui::DragInt("Priority", priority, 1, 0, 256);
+		ImGui::DragFloat("Volume", volume, 0.1, 0, 1);
+		ImGui::DragFloat("Pitch", pitch, 0.1, -3.0f, 3.0f);
 	}
 }
