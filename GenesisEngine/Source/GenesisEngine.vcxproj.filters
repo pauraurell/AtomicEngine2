@@ -80,9 +80,6 @@
     <ClCompile Include="Libs\AK\Win32\AkFilePackageLUT.cpp">
       <Filter>Libs\Wwise\AK</Filter>
     </ClCompile>
-    <ClCompile Include="Audio.cpp">
-      <Filter>GameObjects &amp; Components</Filter>
-    </ClCompile>
     <ClCompile Include="Libs\ImGui\imgui.cpp">
       <Filter>Libs\ImGui</Filter>
     </ClCompile>
@@ -255,6 +252,12 @@
       <Filter>Libs\MathGeoLib</Filter>
     </ClCompile>
     <ClCompile Include="ModuleWwise.cpp" />
+    <ClCompile Include="AudioEmitter.cpp">
+      <Filter>GameObjects &amp; Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioListener.cpp">
+      <Filter>GameObjects &amp; Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -702,9 +705,6 @@
     <ClInclude Include="Libs\AK\Plugin\AllPluginsRegistrationHelpers.h">
       <Filter>Libs\Wwise\AK</Filter>
     </ClInclude>
-    <ClInclude Include="Audio.h">
-      <Filter>GameObjects &amp; Components</Filter>
-    </ClInclude>
     <ClInclude Include="Libs\AK\Wwise\AudioPlugin.h">
       <Filter>Libs\Wwise\AK</Filter>
     </ClInclude>
@@ -1092,6 +1092,12 @@
     </ClInclude>
     <ClInclude Include="Libs\MathGeoLib\include\Geometry\KDTree.h">
       <Filter>Libs\MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioEmitter.h">
+      <Filter>GameObjects &amp; Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioListener.h">
+      <Filter>GameObjects &amp; Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

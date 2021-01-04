@@ -3,18 +3,10 @@
 #include "Component.h"
 #include <vector>;
 
-#include "MathGeoLib/include/MathGeoLib.h"
-
-class ResourceMesh;
-
-typedef float GLfloat;
-typedef unsigned short GLushort;
-typedef unsigned char GLubyte;
-
-class Audio : public Component {
+class AudioEmitter : public Component {
 public:
-	Audio(GameObject* gameObject);
-	virtual ~Audio();
+	AudioEmitter(GameObject* gameObject);
+	virtual ~AudioEmitter();
 
 	void Save(GnJSONArray& save_array) override;
 	void Load(GnJSONObj& load_object) override;

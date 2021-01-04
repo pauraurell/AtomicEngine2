@@ -14,7 +14,8 @@ enum ComponentType {
 	MATERIAL, 
 	CAMERA, 
 	LIGHT,
-	AUDIO
+	AUDIO_EMITTER,
+	AUDIO_LISTENER
 };
 
 class Component {

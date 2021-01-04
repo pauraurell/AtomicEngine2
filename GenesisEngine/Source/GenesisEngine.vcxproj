@@ -93,7 +93,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Audio.h" />
+    <ClInclude Include="AudioEmitter.h" />
+    <ClInclude Include="AudioListener.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="EditorWindow.h" />
@@ -378,7 +379,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="Audio.cpp" />
+    <ClCompile Include="AudioEmitter.cpp" />
+    <ClCompile Include="AudioListener.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Component.cpp" />

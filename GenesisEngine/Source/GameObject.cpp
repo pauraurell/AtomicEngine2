@@ -4,7 +4,8 @@
 #include "Mesh.h"
 #include "Material.h"
 #include "Camera.h"
-#include "Audio.h"
+#include "AudioEmitter.h"
+#include "AudioListener.h"
 #include "ImGui/imgui.h"
 #include "GnJSON.h"
 #include "Application.h"
@@ -31,9 +32,11 @@ GameObject::GameObject(ComponentType component) : GameObject()
 	case ComponentType::LIGHT:
 		name = "Light";
 		break;
-	case ComponentType::AUDIO:
-		name = "Audio";
-	default:
+	case ComponentType::AUDIO_EMITTER:
+		name = "Audio Emitter";
+		break;
+	case ComponentType::AUDIO_LISTENER:
+		name = "Audio Listener";
 		break;
 	}
 }
@@ -233,8 +236,11 @@ Component* GameObject::AddComponent(ComponentType type)
 	case LIGHT:
 		component = new Light(this);
 		break;
-	case AUDIO:
-		component = new Audio(this);
+	case AUDIO_EMITTER:
+		component = new AudioEmitter(this);
+		break;
+	case AUDIO_LISTENER:
+		component = new AudioListener(this);
 		break;
 	default:
 		break;
