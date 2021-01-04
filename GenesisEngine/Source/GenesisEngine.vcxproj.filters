@@ -251,6 +251,9 @@
     <ClCompile Include="Libs\AK\Win32\stdafx.cpp">
       <Filter>Libs\Wwise\AK\Win32</Filter>
     </ClCompile>
+    <ClCompile Include="Audio.cpp">
+      <Filter>GameObjects &amp; Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -1084,6 +1087,9 @@
     </ClInclude>
     <ClInclude Include="Libs\AK\Plugin\MSHRTFFXFactory.h">
       <Filter>Libs\Wwise\AK\Plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio.h">
+      <Filter>GameObjects &amp; Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
