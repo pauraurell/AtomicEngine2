@@ -48,7 +48,6 @@ public:
 	void SetProportionalScale(float multiplier);
 	float3 GetScale();
 
-private:
 	float4x4 _localTransform = float4x4::identity;
 	float4x4 _globalTransform = float4x4::identity;
 	float4x4 _parentGlobalTransform = float4x4::identity;

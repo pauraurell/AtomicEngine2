@@ -3,9 +3,12 @@
 #include "ModuleScene.h"
 #include "GnJSON.h"
 #include "Mesh.h"
+#include "AudioEmitter.h"
 #include "FileSystem.h"
 #include "GameObject.h"
+#include "Component.h"
 #include "Transform.h"
+#include "ModuleWwise.h"
 
 ModuleScene::ModuleScene(bool start_enabled) : Module(start_enabled), show_grid(true), selectedGameObject(nullptr), root(nullptr) 
 {
@@ -27,11 +30,9 @@ bool ModuleScene::Start()
 	selectedGameObject = root;
 	root->SetName("Root");
 
-	//GameObject* baker_house = App->resources->RequestGameObject("Assets/Models/baker_house/BakerHouse.fbx");
-	//AddGameObject(baker_house);
-
 	//GameObject* street_environment = App->resources->RequestGameObject("Assets/Models/street/Street environment_V01.fbx");
 	//AddGameObject(street_environment);
+	cube = AddGameObject(App->resources->RequestGameObject("Assets/EngineAssets/Primitives/cube.fbx"));
 	
 	GameObject* camera = new GameObject();
 	camera->AddComponent(ComponentType::CAMERA);
@@ -40,7 +41,11 @@ bool ModuleScene::Start()
 	AddGameObject(camera);
 	App->renderer3D->SetMainCamera((Camera*)camera->GetComponent(ComponentType::CAMERA));
 
-	//uint baker_house_texture = App->resources->ImportFile("Assets/Textures/Baker_house.png");
+	GameObject* MusicTest = new GameObject();
+	MusicTest->SetName("Perreo Test");
+	MusicTest->AddComponent(ComponentType::AUDIO_EMITTER);
+	AddGameObject(MusicTest);
+	AudioEmitter* music = (AudioEmitter*)MusicTest->GetComponent(ComponentType::AUDIO_EMITTER);
 
 	return ret;
 }
@@ -58,6 +63,8 @@ update_status ModuleScene::Update(float dt)
 		GnGrid grid(24);
 		grid.Render();
 	}
+
+	MoveObject(cube->GetChildAt(0), 0.2);
 
 	HandleInput();
 
@@ -95,7 +102,7 @@ bool ModuleScene::CleanUp()
 	return true;
 }
 
-void ModuleScene::AddGameObject(GameObject* gameObject)
+GameObject* ModuleScene::AddGameObject(GameObject* gameObject)
 {
 	if (gameObject != nullptr) 
 	{
@@ -103,6 +110,7 @@ void ModuleScene::AddGameObject(GameObject* gameObject)
 		root->AddChild(gameObject);
 
 		selectedGameObject = gameObject;
+		return gameObject;
 	}
 }
 
@@ -259,6 +267,21 @@ bool ModuleScene::LoadConfig(GnJSONObj& config)
 	show_grid = config.GetBool("show_grid");
 
 	return true;
+}
+
+void ModuleScene::MoveObject(GameObject* obj, float speed)
+{
+	Transform* transform = (Transform*)obj->GetComponent(ComponentType::TRANSFORM);
+	if ((App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT))
+	{ 
+		transform->_position.x = transform->_position.x - speed; 
+		transform->UpdateGlobalTransform();
+	}
+	if ((App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT))
+	{
+		transform->_position.x = transform->_position.x + speed;
+		transform->UpdateGlobalTransform();
+	}
 }
 
 

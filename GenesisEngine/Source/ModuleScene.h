@@ -22,7 +22,7 @@ public:
 	void HandleInput();
 	bool CleanUp();
 
-	void AddGameObject(GameObject* gameObject);
+	GameObject* AddGameObject(GameObject* gameObject);
 	void DeleteGameObject(GameObject* gameObject);
 	GameObject* GetRoot() { return root; }
 	std::vector<GameObject*> GetAllGameObjects();
@@ -34,9 +34,12 @@ public:
 	bool Save(const char* file_path);
 	bool Load(const char* scene_file);
 
+	void MoveObject(GameObject* obj, float speed);
+
 public:
 	bool show_grid;
 	GameObject* selectedGameObject;
+	GameObject* cube = nullptr;
 
 private:
 	GameObject* root;

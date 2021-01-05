@@ -154,31 +154,23 @@ bool ModuleWwise::InitSoundEngine()
 	}
 #endif // AK_OPTIMIZED
 
-	AKRESULT base_path = g_lowLevelIO.SetBasePath(AKTEXT("../Engine/Assets/SoundBanks/"));
-	if (base_path != AK_Success)
-	{
-		LOG("Invalid base path!");
-		return false;
-	}
-
 	AK::StreamMgr::SetCurrentLanguage(AKTEXT("English(US)"));
 	// Load banks synchronously (from file name).
-	AkBankID bankID; // Not used. These banks can be unloaded with their file name.
 
-	/*AKRESULT eResult = AK::SoundEngine::LoadBank("Init.bnk", AK_DEFAULT_POOL_ID, bankID);
+	AkBankID bankID;
+	const AkOSChar* path = AKTEXT("../Engine/Assets/SoundBanks/");
+	g_lowLevelIO.SetBasePath(path);
+	AKRESULT eResult = AK::SoundEngine::LoadBank("Init.bnk", AK_DEFAULT_POOL_ID, bankID);
+
 	if (eResult != AK_Success)
 	{
-		LOG("Couldn't init the soundbank!");
+		LOG("Could not init soundbank!");
 		return false;
-	}*/
-
-	/*assert(eResult == AK_Success);
-	eResult = AK::SoundEngine::LoadBank(BANKNAME_CAR, bankID);
-	assert(eResult == AK_Success);
-	eResult = AK::SoundEngine::LoadBank(BANKNAME_HUMAN, bankID);
-	assert(eResult == AK_Success);
-	eResult = AK::SoundEngine::LoadBank(BANKNAME_MARKERTEST, bankID);
-	assert(eResult == AK_Success);*/
+	}
+	else
+	{
+		LOG("The Init Sound Bank was loaded successfuly!");
+	}
 
 	LOG("Sound Engine Initialized");
 	return true;

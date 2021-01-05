@@ -53,3 +53,14 @@ void ModuleAudio::Resume()
 {
 	
 }
+
+void ModuleAudio::LoadBank(const char* sound_bank)
+{
+	std::string path = "../Engine/Assets/SoundBanks/";
+	path += sound_bank;
+	AkBankID id = 0;
+	AKRESULT ResultVal = AK::SoundEngine::LoadBank(path.c_str(), AK_DEFAULT_POOL_ID, id);
+
+	if (ResultVal != AK_Success) { LOG("Couldn't load %s", path.c_str()); }
+	else { LOG("%s loaded correctly", path.c_str()); }
+}

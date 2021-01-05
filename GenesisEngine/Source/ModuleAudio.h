@@ -11,6 +11,7 @@ class ModuleAudio : public Module
 public:
 	ModuleAudio(bool start_enabled = true);
 	~ModuleAudio();
+
 	bool Start();
 	update_status PreUpdate(float dt);
 	update_status Update(float dt);
@@ -21,6 +22,8 @@ public:
 	void Stop();
 	void Pause();
 	void Resume();
+
+	void LoadBank(const char* sound_bank);
 };
 
 #endif
