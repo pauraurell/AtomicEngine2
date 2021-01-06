@@ -10,7 +10,7 @@ ModuleAudio::~ModuleAudio()
 bool ModuleAudio::Start()
 {
 	ModuleWwise::InitSoundEngine();
-	//LoadBank("New_SoundBank.bnk");
+	LoadBank("AtomicSoundBank.bnk");
 	return true;
 }
 
