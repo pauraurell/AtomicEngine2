@@ -6,6 +6,8 @@
 #include "Globals.h"
 #include "ModuleWwise.h"
 
+using namespace std;
+
 class ModuleAudio : public Module
 {
 public:

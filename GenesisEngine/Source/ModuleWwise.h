@@ -47,6 +47,4 @@ namespace ModuleWwise
 	bool TermSoundEngine();
 }
 
-
-
 #endif;
