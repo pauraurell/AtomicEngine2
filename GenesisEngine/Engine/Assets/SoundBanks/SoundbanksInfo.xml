@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="11" SoundbankVersion="128">
 	<RootPaths>
-		<ProjectRoot>C:\Users\Pau\Documents\WwiseProjects\project2\</ProjectRoot>
-		<SourceFilesRoot>C:\Users\Pau\Documents\WwiseProjects\project2\.cache\Windows\</SourceFilesRoot>
-		<SoundBanksRoot>C:\Users\Pau\Documents\WwiseProjects\project2\GeneratedSoundBanks\Windows\</SoundBanksRoot>
+		<ProjectRoot>D:\Audiokinetic\Projects\AudioEngine\</ProjectRoot>
+		<SourceFilesRoot>D:\Audiokinetic\Projects\AudioEngine\.cache\Windows\</SourceFilesRoot>
+		<SoundBanksRoot>D:\Audiokinetic\Projects\AudioEngine\GeneratedSoundBanks\Windows\</SoundBanksRoot>
 		<ExternalSourcesInputFile></ExternalSourcesInputFile>
-		<ExternalSourcesOutputRoot>C:\Users\Pau\Documents\WwiseProjects\project2\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
+		<ExternalSourcesOutputRoot>D:\Audiokinetic\Projects\AudioEngine\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
 	</RootPaths>
 	<DialogueEvents/>
 	<StreamedFiles/>
@@ -16,10 +16,16 @@
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 		</SoundBank>
-		<SoundBank Id="4072029455" Language="SFX">
-			<ObjectPath>\SoundBanks\Default Work Unit\New_SoundBank</ObjectPath>
-			<ShortName>New_SoundBank</ShortName>
-			<Path>New_SoundBank.bnk</Path>
+		<SoundBank Id="2243015577" Language="SFX">
+			<ObjectPath>\SoundBanks\Default Work Unit\AtomicSoundbank</ObjectPath>
+			<ShortName>AtomicSoundbank</ShortName>
+			<Path>AtomicSoundbank.bnk</Path>
+			<IncludedMemoryFiles>
+				<File Id="144037770" Language="SFX">
+					<ShortName>Motors de Videojocs\Camilo, El Alfa - BEBÉ (FULLDISCO.ORG).wav</ShortName>
+					<Path>SFX\Motors de Videojocs\Camilo, El Alfa - BEBÉ (FULLDISCO.ORG)_1C9C67B2.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
 		</SoundBank>
 	</SoundBanks>
 </SoundBanksInfo>

@@ -1,0 +1,3 @@
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	144037770	Camilo, El Alfa - BEBÉ (FULLDISCO_ORG)	D:\Audiokinetic\Projects\AudioEngine\.cache\Windows\SFX\Motors de Videojocs\Camilo, El Alfa - BEBÉ (FULLDISCO.ORG)_1C9C67B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Motors de Videojocs\Camilo, El Alfa - BEBÉ (FULLDISCO_ORG)		38011456
+
