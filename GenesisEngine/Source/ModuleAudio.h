@@ -4,6 +4,7 @@
 #include "Globals.h"
 #include "ModuleWwise.h"
 #include "MathGeoLib/include/Math/float3.h"
+#include <AK/SoundEngine/Common/AkTypes.h>
 
 using namespace std;
 
@@ -28,8 +29,14 @@ class AudioSource {
 
 public:
 	void SetPos(float3 pos, float3 rotF, float3 rotT);
+
 	void PlayEvent(uint id);
+	void PauseEvent(uint id);
+	void ResumeEvent(uint id);
 	void StopEvent(uint id);
+
+	float volume = 1.0f;
+	void SetVolume(uint id, float volume);
 
 	AudioSource* AddAudioSource(uint id, const char* name, float3 pos);
 

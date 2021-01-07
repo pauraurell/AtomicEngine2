@@ -74,12 +74,22 @@ void AudioSource::SetPos(float3 pos, float3 rotF, float3 rotT)
 
 void AudioSource::PlayEvent(uint id)
 {
-    AK::SoundEngine::PostEvent(id, this->id);
+	AK::SoundEngine::PostEvent(id, this->id);
+}
+
+void AudioSource::PauseEvent(uint id)
+{
+	AK::SoundEngine::ExecuteActionOnEvent(id, AK::SoundEngine::AkActionOnEventType::AkActionOnEventType_Pause, this->id);
+}
+
+void AudioSource::ResumeEvent(uint id)
+{
+	AK::SoundEngine::ExecuteActionOnEvent(id, AK::SoundEngine::AkActionOnEventType::AkActionOnEventType_Resume, this->id);
 }
 
 void AudioSource::StopEvent(uint id)
 {
-    AK::SoundEngine::ExecuteActionOnEvent(id, AK::SoundEngine::AkActionOnEventType::AkActionOnEventType_Stop, this->id);
+	AK::SoundEngine::ExecuteActionOnEvent(id, AK::SoundEngine::AkActionOnEventType::AkActionOnEventType_Stop, this->id);
 }
 
 AudioSource* AudioSource::AddAudioSource(uint id, const char* name, float3 pos)
@@ -89,4 +99,9 @@ AudioSource* AudioSource::AddAudioSource(uint id, const char* name, float3 pos)
     return source;
 }
 
+void AudioSource::SetVolume(uint id, float volume)
+{
+	AK::SoundEngine::SetGameObjectOutputBusVolume(this->id, AK_INVALID_GAME_OBJECT, volume);
+	this->volume = volume;
+}
 
