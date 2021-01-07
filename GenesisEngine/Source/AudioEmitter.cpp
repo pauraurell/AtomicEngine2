@@ -66,15 +66,21 @@ void AudioEmitter::OnEditor()
 		ImGui::Separator();
 		ImGui::Spacing();
 		
-		ImGui::Checkbox("Mute", &mute);
+		if(ImGui::Checkbox("Mute", &mute))
+		{
+			source->SetVolume(id, 0);
+		}
 		ImGui::Checkbox("Loop", &loop);
 		ImGui::Checkbox("Bypass Reverb Zones", &bypass_reverb_zones);
 		ImGui::Checkbox("Play on Awake", &play_on_awake);
 
 		ImGui::DragInt("Priority", priority, 1, 0, 256);
-		ImGui::DragFloat("Volume", volume, 0.1, 0, 1);
-		ImGui::DragFloat("Pitch", pitch, 0.1, -3.0f, 3.0f);
+		if (ImGui::DragFloat("Volume", &source->volume, 0.01, 0, 1))
+		{
+			source->SetVolume(id, source->volume);
+		}
 	}
+	
 }
 
 void AudioEmitter::SetID(AkGameObjectID id)
