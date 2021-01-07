@@ -20,10 +20,19 @@
 			<ObjectPath>\SoundBanks\Default Work Unit\AtomicSoundbank</ObjectPath>
 			<ShortName>AtomicSoundbank</ShortName>
 			<Path>AtomicSoundbank.bnk</Path>
+			<IncludedEvents>
+				<Event Id="655376382" Name="Song1_to_2" ObjectPath="\Events\Default Work Unit\Song1_to_2"/>
+				<Event Id="2114273916" Name="Song2_to_1" ObjectPath="\Events\Default Work Unit\Song2_to_1"/>
+				<Event Id="1714347020" Name="Start_Loop" ObjectPath="\Events\Default Work Unit\Start_Loop"/>
+			</IncludedEvents>
 			<IncludedMemoryFiles>
 				<File Id="144037770" Language="SFX">
 					<ShortName>Motors de Videojocs\Camilo, El Alfa - BEBÉ (FULLDISCO.ORG).wav</ShortName>
 					<Path>SFX\Motors de Videojocs\Camilo, El Alfa - BEBÉ (FULLDISCO.ORG)_1C9C67B2.wem</Path>
+				</File>
+				<File Id="364733489" Language="SFX">
+					<ShortName>Motors de Videojocs\1 - Kaydy Cain, Uzielito Mix, El Habano - Perreologia.wav</ShortName>
+					<Path>SFX\Motors de Videojocs\1 - Kaydy Cain, Uzielito Mix, El Habano - Perreologia_1C9C67B2.wem</Path>
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
