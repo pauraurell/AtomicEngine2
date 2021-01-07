@@ -32,7 +32,8 @@ bool ModuleScene::Start()
 
 	//GameObject* street_environment = App->resources->RequestGameObject("Assets/Models/street/Street environment_V01.fbx");
 	//AddGameObject(street_environment);
-	cube = AddGameObject(App->resources->RequestGameObject("Assets/Models/car/FuzzyRed.fbx"));
+	car = AddGameObject(App->resources->RequestGameObject("Assets/Models/car/FuzzyRed.fbx"));
+	car->AddComponent(ComponentType::AUDIO_EMITTER);
 	
 	GameObject* camera = new GameObject();
 	camera->AddComponent(ComponentType::CAMERA);
@@ -64,7 +65,7 @@ update_status ModuleScene::Update(float dt)
 		grid.Render();
 	}
 
-	MoveObject(cube->GetChildAt(0), 0.2);
+	if (car != nullptr) { MoveObject(car->GetChildAt(0), 0.2); }
 
 	HandleInput();
 

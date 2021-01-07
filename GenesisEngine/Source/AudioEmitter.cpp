@@ -11,19 +11,23 @@
 AudioEmitter::AudioEmitter(GameObject* gameObject) : Component(gameObject)
 {
 	type = ComponentType::AUDIO_EMITTER;
-	audio_source = nullptr;
 	volume = new float(1.0f);
 	mute = false;
 	bypass_reverb_zones = false;
 	play_on_awake = false;
 	loop = false;
 	priority = new int(128);
-
 	pitch = new float(0.0f);
-	float3 Position;
+
+	float3 TransformPosition;
 	Transform* transform = (Transform*)_gameObject->GetComponent(ComponentType::TRANSFORM);
-	Position = transform->GetPosition();
-	audio_source->AddAudioSource(_gameObject->UUID, _gameObject->GetName(), Position);
+	TransformPosition = transform->GetPosition();
+	float3 pos; 
+	pos.x = TransformPosition.x;
+	pos.y = TransformPosition.y;
+	pos.z = TransformPosition.z;
+
+	source = source->CreateAudioSource(_gameObject->UUID, _gameObject->name.c_str(), pos);
 	LOG("Audio Emitter Component created for %s", _gameObject->GetName())
 }
 
@@ -46,7 +50,11 @@ void AudioEmitter::Load(GnJSONObj& load_object)
 
 void AudioEmitter::Update()
 {
-	
+	float3 TransformPosition;
+	Transform* transform = (Transform*)_gameObject->GetComponent(ComponentType::TRANSFORM);
+	TransformPosition = transform->GetPosition();
+	float3 pos = TransformPosition;
+	source->SetPos(pos, { 1,0,0 }, {0,1,0});
 }
 
 void AudioEmitter::OnEditor()
@@ -67,4 +75,9 @@ void AudioEmitter::OnEditor()
 		ImGui::DragFloat("Volume", volume, 0.1, 0, 1);
 		ImGui::DragFloat("Pitch", pitch, 0.1, -3.0f, 3.0f);
 	}
+}
+
+void AudioEmitter::SetID(AkGameObjectID id)
+{
+	this->id = id;
 }

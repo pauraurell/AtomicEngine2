@@ -55,6 +55,7 @@ public:
 public: 
 	bool to_delete;
 	uint UUID = 0;
+	std::string name;
 
 private:
 	void GenerateAABB(GnMesh* mesh);
@@ -62,7 +63,7 @@ private:
 private:
 	bool enabled;
 	bool _visible;
-	std::string name;
+
 	GameObject* _parent;
 	Transform* transform;
 	std::vector<Component*> components;

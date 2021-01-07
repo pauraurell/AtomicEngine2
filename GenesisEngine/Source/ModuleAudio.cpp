@@ -64,11 +64,11 @@ AudioSource::~AudioSource()
 void AudioSource::SetPos(float3 pos, float3 rotF, float3 rotT)
 {
     position.X = pos.x; position.Y = pos.y; position.Z = pos.z;
-    front.X = rotF.x; front.Y = rotF.y; front.Z = rotF.z;
-    top.X = rotT.x; top.Y = rotT.y; top.Z = rotT.z;
+	orientationFront.X = rotF.x; orientationFront.Y = rotF.y; orientationFront.Z = rotF.z;
+	orientationTop.X = rotT.x; orientationTop.Y = rotT.y; orientationTop.Z = rotT.z;
     
     AkSoundPosition source_position;
-	source_position.Set(position, front, top);
+	source_position.Set(position, orientationFront, orientationTop);
     AK::SoundEngine::SetPosition(id, source_position);
 }
 
@@ -92,16 +92,32 @@ void AudioSource::StopEvent(uint id)
 	AK::SoundEngine::ExecuteActionOnEvent(id, AK::SoundEngine::AkActionOnEventType::AkActionOnEventType_Stop, this->id);
 }
 
-AudioSource* AudioSource::AddAudioSource(uint id, const char* name, float3 pos)
-{
-    AudioSource* source = new AudioSource(id, name);
-    source->SetPos(pos, float3(0,0,0), float3(0, 0, 0));
-    return source;
-}
-
 void AudioSource::SetVolume(uint id, float volume)
 {
 	AK::SoundEngine::SetGameObjectOutputBusVolume(this->id, AK_INVALID_GAME_OBJECT, volume);
 	this->volume = volume;
 }
 
+AudioSource* AudioSource::CreateAudioSource(uint id, const char* name, float3 position)
+{
+	AudioSource* go = new AudioSource(id, name);
+	go->SetPos(position, { 1,0,0 }, { 0,1,0 });
+
+	return go;
+}
+
+AudioSource* AudioSource::CreateAudioListener(uint id, const char* name, float3 position)
+{
+	AudioSource* go = new AudioSource(id, name);
+
+	AkGameObjectID listenerID = go->GetId();
+	AK::SoundEngine::SetDefaultListeners(&listenerID, 1);
+	go->SetPos(position, { 1,0,0 }, { 0,1,0 });
+	App->audio->ListenerId = listenerID;
+	return go;
+}
+
+uint AudioSource::GetId()
+{
+	return id;
+}

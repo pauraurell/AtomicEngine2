@@ -39,7 +39,7 @@ public:
 public:
 	bool show_grid;
 	GameObject* selectedGameObject;
-	GameObject* cube = nullptr;
+	GameObject* car = nullptr;
 
 private:
 	GameObject* root;

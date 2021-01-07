@@ -15,8 +15,10 @@ public:
 	virtual void Update() override;
 	virtual void OnEditor() override;
 
-	AudioSource* audio_source;
+	void SetID(AkGameObjectID id);
 
+	AudioSource* source = nullptr;
+	AkGameObjectID id = 0;
 	bool mute;
 	bool bypass_reverb_zones;
 	bool play_on_awake;

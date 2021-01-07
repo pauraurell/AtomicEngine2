@@ -21,6 +21,8 @@ public:
 	bool CleanUp();
 
 	void LoadBank(const char* sound_bank);
+
+	AkGameObjectID currentListenerID;
 };
 
 class AudioSource {
@@ -28,22 +30,26 @@ class AudioSource {
 	~AudioSource();
 
 public:
-	void SetPos(float3 pos, float3 rotF, float3 rotT);
 
 	void PlayEvent(uint id);
 	void PauseEvent(uint id);
 	void ResumeEvent(uint id);
 	void StopEvent(uint id);
 
-	float volume = 1.0f;
+	void SetPos(float3 pos, float3 rotF, float3 rotT);
 	void SetVolume(uint id, float volume);
+	float volume = 1.0f;
+	
+	AudioSource* CreateAudioSource(uint id, const char* name, float3 position);
+	AudioSource* CreateAudioListener(uint id, const char* name, float3 position);
 
-	AudioSource* AddAudioSource(uint id, const char* name, float3 pos);
+	uint GetId();
 
 private:
 	const char* name = nullptr;
 	AkGameObjectID id;
+
 	AkVector position = { 0,0,0 };
-	AkVector front = { 0,0,0 };
-	AkVector top = { 0,0,0 };
+	AkVector orientationFront = { 0,0,0 };
+	AkVector orientationTop = { 0,0,0 };
 };
