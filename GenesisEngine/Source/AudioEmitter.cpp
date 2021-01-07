@@ -3,6 +3,7 @@
 #include "FileSystem.h"
 #include "GameObject.h"
 #include "GnJSON.h"
+#include "Transform.h"
 
 #include "glew/include/glew.h"
 #include "ImGui/imgui.h"
@@ -10,13 +11,20 @@
 AudioEmitter::AudioEmitter(GameObject* gameObject) : Component(gameObject)
 {
 	type = ComponentType::AUDIO_EMITTER;
+	audio_source = nullptr;
 	volume = new float(1.0f);
 	mute = false;
 	bypass_reverb_zones = false;
 	play_on_awake = false;
 	loop = false;
 	priority = new int(128);
+
 	pitch = new float(0.0f);
+	float3 Position;
+	Transform* transform = (Transform*)_gameObject->GetComponent(ComponentType::TRANSFORM);
+	Position = transform->GetPosition();
+	audio_source->AddAudioSource(_gameObject->UUID, _gameObject->GetName(), Position);
+	LOG("Audio Emitter Component created for %s", _gameObject->GetName())
 }
 
 AudioEmitter::~AudioEmitter()

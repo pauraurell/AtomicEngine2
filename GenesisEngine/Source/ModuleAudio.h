@@ -1,10 +1,9 @@
 #pragma once
-#ifndef MODULEAUDIO_H
-#define MODULEAUDIO_H
 
 #include "Module.h"
 #include "Globals.h"
 #include "ModuleWwise.h"
+#include "MathGeoLib/include/Math/float3.h"
 
 using namespace std;
 
@@ -20,12 +19,24 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
-	void Play();
-	void Stop();
-	void Pause();
-	void Resume();
-
 	void LoadBank(const char* sound_bank);
 };
 
-#endif
+class AudioSource {
+	AudioSource(unsigned __int64 id, const char* name);
+	~AudioSource();
+
+public:
+	void SetPos(float3 pos, float3 rotF, float3 rotT);
+	void PlayEvent(uint id);
+	void StopEvent(uint id);
+
+	AudioSource* AddAudioSource(uint id, const char* name, float3 pos);
+
+private:
+	const char* name = nullptr;
+	AkGameObjectID id;
+	AkVector position = { 0,0,0 };
+	AkVector front = { 0,0,0 };
+	AkVector top = { 0,0,0 };
+};

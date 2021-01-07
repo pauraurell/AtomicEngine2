@@ -13,19 +13,19 @@ Application::Application(int argc, char* args[]) : argc(argc), args(args), want_
 	input = new ModuleInput(true);
 	renderer3D = new ModuleRenderer3D(true);
 	camera = new ModuleCamera3D(true);
+	audio = new ModuleAudio(true);
 	scene = new ModuleScene(true);
 	editor = new Editor(true);
 	resources = new ModuleResources(true);
-	audio = new ModuleAudio(true);
 
 	// Main Modules
 	AddModule(window);
 	AddModule(resources);
 	AddModule(camera);
 	AddModule(input);
+	AddModule(audio);
 	AddModule(scene);
 	AddModule(editor);
-	AddModule(audio);
 
 	// Renderer last!
 	AddModule(renderer3D);

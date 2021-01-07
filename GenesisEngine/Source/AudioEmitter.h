@@ -2,6 +2,7 @@
 #include "Globals.h"
 #include "Component.h"
 #include <vector>;
+#include "ModuleAudio.h"
 
 class AudioEmitter : public Component {
 public:
@@ -13,6 +14,8 @@ public:
 
 	virtual void Update() override;
 	virtual void OnEditor() override;
+
+	AudioSource* audio_source;
 
 	bool mute;
 	bool bypass_reverb_zones;
