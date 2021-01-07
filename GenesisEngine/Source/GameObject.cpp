@@ -6,6 +6,7 @@
 #include "Camera.h"
 #include "AudioEmitter.h"
 #include "AudioListener.h"
+#include "AudioReverbZone.h"
 #include "ImGui/imgui.h"
 #include "GnJSON.h"
 #include "Application.h"
@@ -241,6 +242,9 @@ Component* GameObject::AddComponent(ComponentType type)
 		break;
 	case AUDIO_LISTENER:
 		component = new AudioListener(this);
+		break;
+	case AUDIO_REVERB_ZONE:
+		component = new AudioReverbZone(this);
 		break;
 	default:
 		break;

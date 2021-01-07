@@ -2,6 +2,7 @@
 #include "Globals.h"
 #include "Component.h"
 #include <vector>;
+#include "MathGeoLib\include\MathGeoLib.h"
 
 class AudioReverbZone : public Component {
 public:
@@ -14,6 +15,6 @@ public:
 	virtual void Update() override;
 	virtual void OnEditor() override;
 
-	float min_distance;
-	float max_distance;
+	float r;
+	math::Sphere sphere;
 };
