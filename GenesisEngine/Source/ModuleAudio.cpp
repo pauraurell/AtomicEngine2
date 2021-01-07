@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleAudio.h"
+#include "AK/Wwise_IDs.h"
 
 ModuleAudio::ModuleAudio(bool start_enabled) : Module(start_enabled){}
 

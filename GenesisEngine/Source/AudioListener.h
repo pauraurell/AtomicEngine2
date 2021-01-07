@@ -3,6 +3,8 @@
 #include "Component.h"
 #include <vector>;
 
+class AudioSource;
+
 class AudioListener : public Component {
 public:
 	AudioListener(GameObject* gameObject);
@@ -13,4 +15,8 @@ public:
 
 	virtual void Update() override;
 	virtual void OnEditor() override;
+
+private:
+	AudioSource* source = nullptr;
+	//AkGameObjectID id = 0;
 };

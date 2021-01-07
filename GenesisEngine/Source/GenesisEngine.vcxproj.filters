@@ -1105,6 +1105,9 @@
     <ClInclude Include="AudioReverbZone.h">
       <Filter>GameObjects &amp; Components</Filter>
     </ClInclude>
+    <ClInclude Include="Libs\AK\Wwise_IDs.h">
+      <Filter>Libs\Wwise\AK</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="Libs\AK\ws2_32.LIB">

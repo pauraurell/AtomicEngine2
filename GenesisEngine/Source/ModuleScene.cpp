@@ -9,6 +9,7 @@
 #include "Component.h"
 #include "Transform.h"
 #include "ModuleWwise.h"
+#include "AK/Wwise_IDs.h"
 
 ModuleScene::ModuleScene(bool start_enabled) : Module(start_enabled), show_grid(true), selectedGameObject(nullptr), root(nullptr) 
 {
@@ -37,6 +38,7 @@ bool ModuleScene::Start()
 	
 	GameObject* camera = new GameObject();
 	camera->AddComponent(ComponentType::CAMERA);
+	camera->AddComponent(ComponentType::AUDIO_LISTENER);
 	camera->SetName("Main Camera");
 	camera->GetTransform()->SetPosition(float3(0.0f, 1.0f, -5.0f));
 	AddGameObject(camera);
@@ -47,6 +49,9 @@ bool ModuleScene::Start()
 	MusicTest->AddComponent(ComponentType::AUDIO_EMITTER);
 	AddGameObject(MusicTest);
 	AudioEmitter* music = (AudioEmitter*)MusicTest->GetComponent(ComponentType::AUDIO_EMITTER);
+
+	music->SetID(AK::EVENTS::START_LOOP);
+	music->source->PlayEvent(AK::EVENTS::START_LOOP);
 
 	return ret;
 }

@@ -22,7 +22,7 @@ public:
 
 	void LoadBank(const char* sound_bank);
 
-	AkGameObjectID currentListenerID;
+	AkGameObjectID ListenerId;
 };
 
 class AudioSource {
