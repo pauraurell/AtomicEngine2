@@ -1,0 +1,9 @@
+Event	ID	Name			Wwise Object Path	Notes
+	655376382	Song1_to_2			\Default Work Unit\Song1_to_2	
+	1714347020	Start_Loop			\Default Work Unit\Start_Loop	
+	2114273916	Song2_to_1			\Default Work Unit\Song2_to_1	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	144037770	Camilo, El Alfa - BEBÉ (FULLDISCO_ORG)	D:\Audiokinetic\Projects\AudioEngine\.cache\Windows\SFX\Motors de Videojocs\Camilo, El Alfa - BEBÉ (FULLDISCO.ORG)_1C9C67B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Motors de Videojocs\Camilo, El Alfa - BEBÉ (FULLDISCO_ORG)		38011456
+	364733489	1 - Kaydy Cain, Uzielito Mix, El Habano - Perreologia	D:\Audiokinetic\Projects\AudioEngine\.cache\Windows\SFX\Motors de Videojocs\1 - Kaydy Cain, Uzielito Mix, El Habano - Perreologia_1C9C67B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Motors de Videojocs\1 - Kaydy Cain, Uzielito Mix, El Habano - Perreologia		37956348
+
