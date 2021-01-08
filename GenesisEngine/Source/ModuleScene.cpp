@@ -303,7 +303,7 @@ void ModuleScene::BackgroundMusicLoop()
 		{
 			AudioEmitter* music = (AudioEmitter*)MusicTest->GetComponent(ComponentType::AUDIO_EMITTER);
 			music->SetID(AK::EVENTS::SONG1_TO_2);
-			music->source->PlayEvent(AK::EVENTS::SONG1_TO_2);
+			App->audio->PlayEvent(AK::EVENTS::SONG1_TO_2, music->emitter);
 			background_timer.Start();
 			background_music = true;
 		}
@@ -311,7 +311,7 @@ void ModuleScene::BackgroundMusicLoop()
 		{
 			AudioEmitter* music = (AudioEmitter*)MusicTest->GetComponent(ComponentType::AUDIO_EMITTER);
 			music->SetID(AK::EVENTS::SONG2_TO_1);
-			music->source->PlayEvent(AK::EVENTS::SONG2_TO_1);
+			App->audio->PlayEvent(AK::EVENTS::SONG2_TO_1, music->emitter);
 			background_timer.Start();
 			background_music = false;
 		}
