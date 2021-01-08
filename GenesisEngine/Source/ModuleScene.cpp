@@ -44,7 +44,7 @@ bool ModuleScene::Start()
 	AddGameObject(camera);
 	App->renderer3D->SetMainCamera((Camera*)camera->GetComponent(ComponentType::CAMERA));
 
-	GameObject* MusicTest = new GameObject();
+	MusicTest = new GameObject();
 	MusicTest->SetName("Perreo Test");
 	MusicTest->AddComponent(ComponentType::AUDIO_EMITTER);
 	AddGameObject(MusicTest);
@@ -52,6 +52,9 @@ bool ModuleScene::Start()
 
 	music->SetID(AK::EVENTS::START_LOOP);
 	music->source->PlayEvent(AK::EVENTS::START_LOOP);
+
+	background_timer.Start();
+	background_music = false;
 
 	return ret;
 }
@@ -75,6 +78,8 @@ update_status ModuleScene::Update(float dt)
 	HandleInput();
 
 	root->Update();
+
+	BackgroundMusicLoop();
 
 	return UPDATE_CONTINUE;
 }
@@ -290,6 +295,25 @@ void ModuleScene::MoveObject(GameObject* obj, float speed)
 	}
 }
 
-
-
-
+void ModuleScene::BackgroundMusicLoop()
+{
+	if (background_timer.ReadSec() >= 30)
+	{
+		if (background_music == false)
+		{
+			AudioEmitter* music = (AudioEmitter*)MusicTest->GetComponent(ComponentType::AUDIO_EMITTER);
+			music->SetID(AK::EVENTS::SONG1_TO_2);
+			music->source->PlayEvent(AK::EVENTS::SONG1_TO_2);
+			background_timer.Start();
+			background_music = true;
+		}
+		else if (background_music == true)
+		{
+			AudioEmitter* music = (AudioEmitter*)MusicTest->GetComponent(ComponentType::AUDIO_EMITTER);
+			music->SetID(AK::EVENTS::SONG2_TO_1);
+			music->source->PlayEvent(AK::EVENTS::SONG2_TO_1);
+			background_timer.Start();
+			background_music = false;
+		}
+	}
+}

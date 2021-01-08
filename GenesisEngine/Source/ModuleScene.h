@@ -3,6 +3,7 @@
 #include "Globals.h"
 #include "ImGui/imgui.h"
 #include "ImGuizmo/ImGuizmo.h"
+#include "Timer.h"
 
 #include <vector>
 
@@ -36,10 +37,15 @@ public:
 
 	void MoveObject(GameObject* obj, float speed);
 
+	void BackgroundMusicLoop();
+
 public:
 	bool show_grid;
 	GameObject* selectedGameObject;
 	GameObject* car = nullptr;
+	GameObject* MusicTest;
+	Timer background_timer;
+	bool background_music;
 
 private:
 	GameObject* root;
