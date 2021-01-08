@@ -4,9 +4,11 @@
 #include "Globals.h"
 #include "ModuleWwise.h"
 #include "MathGeoLib/include/Math/float3.h"
-#include <AK/SoundEngine/Common/AkTypes.h>
+#include "AudioObject.h"
+#include <vector>
 
 using namespace std;
+class GameObject;
 
 class ModuleAudio : public Module
 {
@@ -20,36 +22,16 @@ public:
 	update_status PostUpdate(float dt);
 	bool CleanUp();
 
+	void PlayEvent(uint id, AudioObject* obj);
+	void PauseEvent(uint id, AudioObject* obj);
+	void ResumeEvent(uint id, AudioObject* obj);
+	void StopEvent(uint id, AudioObject* obj);
+
 	void LoadBank(const char* sound_bank);
 
-	AkGameObjectID ListenerId;
-};
+	AudioObject* CreateSource(GameObject* go);
+	AudioObject* CreateListener(GameObject* go);
 
-class AudioSource {
-	AudioSource(unsigned __int64 id, const char* name);
-	~AudioSource();
-
-public:
-
-	void PlayEvent(uint id);
-	void PauseEvent(uint id);
-	void ResumeEvent(uint id);
-	void StopEvent(uint id);
-
-	void SetPos(float3 pos, float3 rotF, float3 rotT);
-	void SetVolume(uint id, float volume);
-	float volume = 1.0f;
-	
-	AudioSource* CreateAudioSource(uint id, const char* name, float3 position);
-	AudioSource* CreateAudioListener(uint id, const char* name, float3 position);
-
-	uint GetId();
-
-private:
-	const char* name = nullptr;
-	AkGameObjectID id;
-
-	AkVector position = { 0,0,0 };
-	AkVector orientationFront = { 0,0,0 };
-	AkVector orientationTop = { 0,0,0 };
+	AkGameObjectID ListenerObjectId;
+	vector<AudioObject*> audio_objects;
 };

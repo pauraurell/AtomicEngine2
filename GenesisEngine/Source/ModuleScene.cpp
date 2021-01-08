@@ -51,7 +51,7 @@ bool ModuleScene::Start()
 	AudioEmitter* music = (AudioEmitter*)MusicTest->GetComponent(ComponentType::AUDIO_EMITTER);
 
 	music->SetID(AK::EVENTS::START_LOOP);
-	music->source->PlayEvent(AK::EVENTS::START_LOOP);
+	App->audio->PlayEvent(AK::EVENTS::START_LOOP, music->emitter);
 
 	background_timer.Start();
 	background_music = false;
