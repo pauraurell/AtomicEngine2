@@ -13,17 +13,13 @@ AudioListener::AudioListener(GameObject* gameObject) : Component(gameObject)
 {
 	type = ComponentType::AUDIO_LISTENER;
 
-	float3 position;
-	position.x = gameObject->GetTransform()->_position.x;
-	position.y = gameObject->GetTransform()->_position.y;
-	position.z = gameObject->GetTransform()->_position.z;
-
-	source = source->CreateAudioListener(gameObject->UUID, gameObject->name.c_str(), position);
+	listener = App->audio->CreateListener(gameObject);
+	LOG("Audio Listener Component created for %s", _gameObject->GetName())
 }
 
 AudioListener::~AudioListener()
 {
-
+	listener->DeleteObject();
 }
 
 void AudioListener::Save(GnJSONArray& save_array)
@@ -40,12 +36,10 @@ void AudioListener::Load(GnJSONObj& load_object)
 
 void AudioListener::Update()
 {
-	Camera* cam = App->camera->GetCamera();
-	float3 pos = cam->GetFrustum().pos;
-	float3 front = cam->GetFrustum().front;
-	float3 top = cam->GetFrustum().up;
-
-	source->SetPos(pos, front, top);
+	float3 position = App->camera->GetCamera()->GetFrustum().pos;
+	float3 front = App->camera->GetCamera()->GetFrustum().front;
+	float3 up = App->camera->GetCamera()->GetFrustum().up;
+	listener->SetPos(position, front, up);
 }
 
 void AudioListener::OnEditor()

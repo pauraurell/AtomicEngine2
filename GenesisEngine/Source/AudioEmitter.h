@@ -3,6 +3,7 @@
 #include "Component.h"
 #include <vector>;
 #include "ModuleAudio.h"
+#include "AudioObject.h"
 
 class AudioEmitter : public Component {
 public:
@@ -17,7 +18,7 @@ public:
 
 	void SetID(AkGameObjectID id);
 
-	AudioSource* source = nullptr;
+	AudioObject* emitter = nullptr;
 	AkGameObjectID id = 0;
 	bool mute;
 	bool bypass_reverb_zones;

@@ -2,6 +2,8 @@
 #include "Application.h"
 #include "ModuleAudio.h"
 #include "AK/Wwise_IDs.h"
+#include "GameObject.h"
+#include "Transform.h"
 
 ModuleAudio::ModuleAudio(bool start_enabled) : Module(start_enabled){}
 
@@ -33,6 +35,10 @@ update_status ModuleAudio::PostUpdate(float dt)
 
 bool ModuleAudio::CleanUp()
 {
+	for (int i = 0; i < audio_objects.size(); i++)
+	{
+		//audio_objects[i]->DeleteObject();
+	}
 	ModuleWwise::TermSoundEngine();
 	return true;
 }
@@ -50,75 +56,41 @@ void ModuleAudio::LoadBank(const char* sound_bank)
 	}
 }
 
-AudioSource::AudioSource(unsigned __int64 id, const char* name)
+AudioObject* ModuleAudio::CreateSource(GameObject* go)
 {
-    this->id = id;
-    this->name = name;
-    AK::SoundEngine::RegisterGameObj(this->id, this->name);
+	AudioObject* new_sourceObj = new AudioObject(go->UUID, go->GetName());
+	new_sourceObj->SetPos(go->GetTransform()->GetPosition(), { 1,0,0 }, { 0,1,0 });
+
+	return new_sourceObj;
 }
 
-AudioSource::~AudioSource()
+AudioObject* ModuleAudio::CreateListener(GameObject* go)
 {
-    AK::SoundEngine::UnregisterGameObj(id);
-}
+	AudioObject* new_listenerObj = new AudioObject(go->UUID, go->GetName());
 
-void AudioSource::SetPos(float3 pos, float3 rotF, float3 rotT)
-{
-    position.X = pos.x; position.Y = pos.y; position.Z = pos.z;
-	orientationFront.X = rotF.x; orientationFront.Y = rotF.y; orientationFront.Z = rotF.z;
-	orientationTop.X = rotT.x; orientationTop.Y = rotT.y; orientationTop.Z = rotT.z;
-    
-    AkSoundPosition source_position;
-	source_position.Set(position, orientationFront, orientationTop);
-    AK::SoundEngine::SetPosition(id, source_position);
-}
-
-void AudioSource::PlayEvent(uint id)
-{
-	AK::SoundEngine::PostEvent(id, this->id);
-}
-
-void AudioSource::PauseEvent(uint id)
-{
-	AK::SoundEngine::ExecuteActionOnEvent(id, AK::SoundEngine::AkActionOnEventType::AkActionOnEventType_Pause, this->id);
-}
-
-void AudioSource::ResumeEvent(uint id)
-{
-	AK::SoundEngine::ExecuteActionOnEvent(id, AK::SoundEngine::AkActionOnEventType::AkActionOnEventType_Resume, this->id);
-}
-
-void AudioSource::StopEvent(uint id)
-{
-	AK::SoundEngine::ExecuteActionOnEvent(id, AK::SoundEngine::AkActionOnEventType::AkActionOnEventType_Stop, this->id);
-}
-
-void AudioSource::SetVolume(uint id, float volume)
-{
-	AK::SoundEngine::SetGameObjectOutputBusVolume(this->id, AK_INVALID_GAME_OBJECT, volume);
-	this->volume = volume;
-}
-
-AudioSource* AudioSource::CreateAudioSource(uint id, const char* name, float3 position)
-{
-	AudioSource* go = new AudioSource(id, name);
-	go->SetPos(position, { 1,0,0 }, { 0,1,0 });
-
-	return go;
-}
-
-AudioSource* AudioSource::CreateAudioListener(uint id, const char* name, float3 position)
-{
-	AudioSource* go = new AudioSource(id, name);
-
-	AkGameObjectID listenerID = go->GetId();
+	AkGameObjectID listenerID = new_listenerObj->GetId();
 	AK::SoundEngine::SetDefaultListeners(&listenerID, 1);
-	go->SetPos(position, { 1,0,0 }, { 0,1,0 });
-	App->audio->ListenerId = listenerID;
-	return go;
+	new_listenerObj->SetPos(go->GetTransform()->GetPosition(), { 1,0,0 }, { 0,1,0 });
+	App->audio->ListenerObjectId = listenerID;
+	return new_listenerObj;
 }
 
-uint AudioSource::GetId()
+void ModuleAudio::PlayEvent(uint id, AudioObject* obj)
 {
-	return id;
+	AK::SoundEngine::PostEvent(id, obj->ObjectId);
+}
+
+void ModuleAudio::PauseEvent(uint id, AudioObject* obj)
+{
+	AK::SoundEngine::ExecuteActionOnEvent(id, AK::SoundEngine::AkActionOnEventType::AkActionOnEventType_Pause, obj->ObjectId);
+}
+
+void ModuleAudio::ResumeEvent(uint id, AudioObject* obj)
+{
+	AK::SoundEngine::ExecuteActionOnEvent(id, AK::SoundEngine::AkActionOnEventType::AkActionOnEventType_Resume, obj->ObjectId);
+}
+
+void ModuleAudio::StopEvent(uint id, AudioObject* obj)
+{
+	AK::SoundEngine::ExecuteActionOnEvent(id, AK::SoundEngine::AkActionOnEventType::AkActionOnEventType_Stop, obj->ObjectId);
 }

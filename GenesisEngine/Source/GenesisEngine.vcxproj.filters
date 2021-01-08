@@ -251,7 +251,6 @@
     <ClCompile Include="Libs\MathGeoLib\include\Math\float3.cpp">
       <Filter>Libs\MathGeoLib</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleWwise.cpp" />
     <ClCompile Include="AudioEmitter.cpp">
       <Filter>GameObjects &amp; Components</Filter>
     </ClCompile>
@@ -260,6 +259,12 @@
     </ClCompile>
     <ClCompile Include="AudioReverbZone.cpp">
       <Filter>GameObjects &amp; Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleWwise.cpp">
+      <Filter>Tools\Wwise</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioObject.cpp">
+      <Filter>Tools\Wwise</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1089,7 +1094,6 @@
     <ClInclude Include="Libs\AK\Plugin\MSHRTFFXFactory.h">
       <Filter>Libs\Wwise\AK</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleWwise.h" />
     <ClInclude Include="Libs\MathGeoLib\include\Math\myassert.h">
       <Filter>Libs\MathGeoLib</Filter>
     </ClInclude>
@@ -1107,6 +1111,12 @@
     </ClInclude>
     <ClInclude Include="Libs\AK\Wwise_IDs.h">
       <Filter>Libs\Wwise\AK</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleWwise.h">
+      <Filter>Tools\Wwise</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioObject.h">
+      <Filter>Tools\Wwise</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1200,6 +1210,9 @@
     </Filter>
     <Filter Include="Tools">
       <UniqueIdentifier>{fd3a559c-619a-416c-97b1-6aafdda56ced}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools\Wwise">
+      <UniqueIdentifier>{da76ffe0-eada-4e3e-9f3a-71d5e9b0979e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

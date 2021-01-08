@@ -19,21 +19,13 @@ AudioEmitter::AudioEmitter(GameObject* gameObject) : Component(gameObject)
 	priority = new int(128);
 	pitch = new float(0.0f);
 
-	float3 TransformPosition;
-	Transform* transform = (Transform*)_gameObject->GetComponent(ComponentType::TRANSFORM);
-	TransformPosition = transform->GetPosition();
-	float3 pos; 
-	pos.x = TransformPosition.x;
-	pos.y = TransformPosition.y;
-	pos.z = TransformPosition.z;
-
-	source = source->CreateAudioSource(_gameObject->UUID, _gameObject->name.c_str(), pos);
+	emitter = App->audio->CreateSource(gameObject);
 	LOG("Audio Emitter Component created for %s", _gameObject->GetName())
 }
 
 AudioEmitter::~AudioEmitter()
 {
-	
+	emitter->DeleteObject();
 }
 
 void AudioEmitter::Save(GnJSONArray& save_array)
@@ -50,11 +42,8 @@ void AudioEmitter::Load(GnJSONObj& load_object)
 
 void AudioEmitter::Update()
 {
-	float3 TransformPosition;
-	Transform* transform = (Transform*)_gameObject->GetComponent(ComponentType::TRANSFORM);
-	TransformPosition = transform->GetPosition();
-	float3 pos = TransformPosition;
-	source->SetPos(pos, { 1,0,0 }, {0,1,0});
+	float3 Position = _gameObject->GetTransform()->GetPosition();
+	emitter->SetPos(Position, { 1,0,0 }, {0,1,0});
 }
 
 void AudioEmitter::OnEditor()
@@ -68,19 +57,17 @@ void AudioEmitter::OnEditor()
 		
 		if(ImGui::Checkbox("Mute", &mute))
 		{
-			source->SetVolume(id, 0);
+			emitter->SetVolume(id, 0);
 		}
 		ImGui::Checkbox("Loop", &loop);
 		ImGui::Checkbox("Bypass Reverb Zones", &bypass_reverb_zones);
-		ImGui::Checkbox("Play on Awake", &play_on_awake);
 
 		ImGui::DragInt("Priority", priority, 1, 0, 256);
-		if (ImGui::DragFloat("Volume", &source->volume, 0.01, 0, 1))
+		if (ImGui::DragFloat("Volume", &emitter->volume, 0.01, 0, 1))
 		{
-			source->SetVolume(id, source->volume);
+			emitter->SetVolume(id, emitter->volume);
 		}
 	}
-	
 }
 
 void AudioEmitter::SetID(AkGameObjectID id)
