@@ -35,6 +35,9 @@ bool ModuleScene::Start()
 	//AddGameObject(street_environment);
 	car = AddGameObject(App->resources->RequestGameObject("Assets/Models/car/FuzzyRed.fbx"));
 	car->AddComponent(ComponentType::AUDIO_EMITTER);
+	AudioEmitter* carMusic = (AudioEmitter*)car->GetComponent(ComponentType::AUDIO_EMITTER);
+	carMusic->SetID(AK::EVENTS::PLAYMOVINGOBJ);
+	App->audio->PlayEvent(AK::EVENTS::PLAYMOVINGOBJ, carMusic->emitter);
 	
 	GameObject* camera = new GameObject();
 	camera->AddComponent(ComponentType::CAMERA);

@@ -14,6 +14,7 @@ bool ModuleAudio::Start()
 {
 	ModuleWwise::InitSoundEngine();
 	LoadBank("AtomicSoundBank.bnk");
+	LoadBank("Atomic2.bnk");
 	return true;
 }
 
