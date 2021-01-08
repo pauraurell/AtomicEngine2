@@ -10,6 +10,7 @@
 #include "Transform.h"
 #include "ModuleWwise.h"
 #include "AK/Wwise_IDs.h"
+#include "AK/SpatialAudio/Common/AkSpatialAudio.h"
 
 ModuleScene::ModuleScene(bool start_enabled) : Module(start_enabled), show_grid(true), selectedGameObject(nullptr), root(nullptr) 
 {
@@ -38,15 +39,19 @@ bool ModuleScene::Start()
 	AudioEmitter* carMusic = (AudioEmitter*)car->GetComponent(ComponentType::AUDIO_EMITTER);
 	carMusic->SetID(AK::EVENTS::PLAYMOVINGOBJ);
 	App->audio->PlayEvent(AK::EVENTS::PLAYMOVINGOBJ, carMusic->emitter);
+	AkEmitterSettings* settings = new AkEmitterSettings();
+	AK::SpatialAudio::RegisterEmitter(carMusic->id, *settings);
+	//AK::SpatialAudio::
 	
 	GameObject* camera = new GameObject();
 	camera->AddComponent(ComponentType::CAMERA);
 	camera->AddComponent(ComponentType::AUDIO_LISTENER);
+	AK::SpatialAudio::RegisterListener(App->audio->ListenerObjectId);
 	camera->SetName("Main Camera");
 	camera->GetTransform()->SetPosition(float3(0.0f, 1.0f, -5.0f));
 	AddGameObject(camera);
 	App->renderer3D->SetMainCamera((Camera*)camera->GetComponent(ComponentType::CAMERA));
-
+	
 	MusicTest = new GameObject();
 	MusicTest->SetName("Perreo Test");
 	MusicTest->AddComponent(ComponentType::AUDIO_EMITTER);
