@@ -20,6 +20,8 @@ AudioEmitter::AudioEmitter(GameObject* gameObject) : Component(gameObject)
 	pitch = new float(0.0f);
 
 	emitter = App->audio->CreateSource(gameObject);
+	/*float3 Position = _gameObject->GetTransform()->GetPosition();
+	emitter = App->audio->CreateSoundObj(gameObject->UUID, gameObject->name.c_str(), Position.x, Position.y, Position.z);*/
 	LOG("Audio Emitter Component created for %s", _gameObject->GetName())
 }
 
@@ -57,6 +59,7 @@ void AudioEmitter::Update()
 {
 	float3 Position = _gameObject->GetTransform()->GetPosition();
 	emitter->SetPos(Position, { 1,0,0 }, {0,1,0});
+	//_gameObject->GetTransform()->SetPosition(Position.x, Position.y, Position.z);
 }
 
 void AudioEmitter::OnEditor()

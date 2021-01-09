@@ -20,6 +20,7 @@ public:
 	bool Init();
 	bool LoadConfig(GnJSONObj& config) override;
 	update_status Update(float dt);
+	//update_status PostUpdate(float dt);
 	void HandleInput();
 	bool CleanUp();
 
@@ -44,6 +45,7 @@ public:
 
 public:
 	bool show_grid;
+	GameObject* camera;
 	GameObject* selectedGameObject;
 	GameObject* car = nullptr;
 	GameObject* MusicTest;

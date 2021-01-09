@@ -171,6 +171,7 @@ void Application::StartGame()
 	in_game = true;
 	Time::gameClock.Start();
 	Save("Library/Scenes/tmp.scene");
+	//scene->StartSceneAudioEvents();
 }
 
 void Application::StopGame()
@@ -178,6 +179,7 @@ void Application::StopGame()
 	in_game = false;
 	Time::gameClock.Stop();
 	Load("Library/Scenes/tmp.scene");
+	//scene->StopSceneAudioEvents();
 }
 
 void Application::AddModule(Module* mod)

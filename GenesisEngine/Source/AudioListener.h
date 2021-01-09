@@ -2,8 +2,7 @@
 #include "Globals.h"
 #include "Component.h"
 #include <vector>;
-
-class AudioObject;
+#include "AudioObject.h"
 
 class AudioListener : public Component {
 public:

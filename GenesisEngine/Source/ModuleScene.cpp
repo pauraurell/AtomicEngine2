@@ -37,12 +37,11 @@ bool ModuleScene::Start()
 	car = AddGameObject(App->resources->RequestGameObject("Assets/Models/car/FuzzyRed.fbx"));
 	car->AddComponent(ComponentType::AUDIO_EMITTER);
 	AudioEmitter* carMusic = (AudioEmitter*)car->GetComponent(ComponentType::AUDIO_EMITTER);
+
 	
-	
-	GameObject* camera = new GameObject();
+	camera = new GameObject();
 	camera->AddComponent(ComponentType::CAMERA);
 	camera->AddComponent(ComponentType::AUDIO_LISTENER);
-	AK::SpatialAudio::RegisterListener(App->audio->ListenerObjectId);
 	camera->SetName("Main Camera");
 	camera->GetTransform()->SetPosition(float3(0.0f, 1.0f, -5.0f));
 	AddGameObject(camera);
@@ -81,13 +80,13 @@ update_status ModuleScene::Update(float dt)
 		grid.Render();
 	}
 
-
-
 	HandleInput();
 
 	root->Update();
 
 	BackgroundMusicLoop();
+
+	//if (App->in_game) { MoveObject(car, 0.1); }
 
 	return UPDATE_CONTINUE;
 }
@@ -291,16 +290,29 @@ bool ModuleScene::LoadConfig(GnJSONObj& config)
 void ModuleScene::MoveObject(GameObject* obj, float speed)
 {
 	Transform* transform = (Transform*)obj->GetComponent(ComponentType::TRANSFORM);
-	if ((App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT))
-	{ 
-		transform->_position.x = transform->_position.x - speed; 
-		transform->UpdateGlobalTransform();
-	}
-	if ((App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT))
+	if (transform->_position.x < 20 && transform->_position.z <= 0) 
 	{
-		transform->_position.x = transform->_position.x + speed;
-		transform->UpdateGlobalTransform();
+		transform->_position.x = transform->_position.x + speed; 
+		obj->GetChildAt(0)->GetTransform()->SetRotation(-90, 0, 90);
 	}
+	
+	else if (transform->_position.x > 20) 
+	{
+		transform->_position.z = transform->_position.z + speed;
+		obj->GetChildAt(0)->GetTransform()->SetRotation(-90, 0, 0);
+	} 
+	if (transform->_position.z > 20 && transform->_position.x > 0) 
+	{
+		transform->_position.x = transform->_position.x - speed;
+		obj->GetChildAt(0)->GetTransform()->SetRotation(-90, 0, 270);
+	} 
+	else if (transform->_position.x < 0) 
+	{
+		transform->_position.z = transform->_position.z - speed;
+		obj->GetChildAt(0)->GetTransform()->SetRotation(-90, 0, 180);
+	}
+	transform->UpdateGlobalTransform();
+	obj->UpdateChildrenTransforms();
 }
 
 void ModuleScene::BackgroundMusicLoop()

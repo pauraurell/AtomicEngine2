@@ -3,7 +3,7 @@
 #include "ModuleWwise.h"
 #include "MathGeoLib/include/Math/float3.h"
 
-class AudioObject 
+class AudioObject
 {
 public:
 	AudioObject(unsigned __int64 id, const char* name);
@@ -22,3 +22,4 @@ public:
 
 	const char* name = nullptr;
 };
+
