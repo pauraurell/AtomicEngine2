@@ -35,9 +35,6 @@ bool ModuleScene::Start()
 	//AddGameObject(street_environment);
 	car = AddGameObject(App->resources->RequestGameObject("Assets/Models/car/FuzzyRed.fbx"));
 	car->AddComponent(ComponentType::AUDIO_EMITTER);
-	AudioEmitter* carMusic = (AudioEmitter*)car->GetComponent(ComponentType::AUDIO_EMITTER);
-	carMusic->SetID(AK::EVENTS::PLAYMOVINGOBJ);
-	App->audio->PlayEvent(AK::EVENTS::PLAYMOVINGOBJ, carMusic->emitter);
 	
 	GameObject* camera = new GameObject();
 	camera->AddComponent(ComponentType::CAMERA);
@@ -53,11 +50,15 @@ bool ModuleScene::Start()
 	AddGameObject(MusicTest);
 	AudioEmitter* music = (AudioEmitter*)MusicTest->GetComponent(ComponentType::AUDIO_EMITTER);
 
-	music->SetID(AK::EVENTS::START_LOOP);
-	App->audio->PlayEvent(AK::EVENTS::START_LOOP, music->emitter);
+	GameObject* TunnelEffect = new GameObject();
+	TunnelEffect->AddComponent(ComponentType::AUDIO_REVERB_ZONE);
+	TunnelEffect->SetName("Tunnel Effect");
+	AddGameObject(TunnelEffect);
 
 	background_timer.Start();
 	background_music = false;
+
+	StartSceneAudioEvents();
 
 	return ret;
 }
@@ -76,7 +77,7 @@ update_status ModuleScene::Update(float dt)
 		grid.Render();
 	}
 
-	if (car != nullptr) { MoveObject(car->GetChildAt(0), 0.2); }
+
 
 	HandleInput();
 
@@ -319,4 +320,22 @@ void ModuleScene::BackgroundMusicLoop()
 			background_music = false;
 		}
 	}
+}
+
+void ModuleScene::StartSceneAudioEvents()
+{
+	AudioEmitter* music = (AudioEmitter*)MusicTest->GetComponent(ComponentType::AUDIO_EMITTER);
+	music->SetID(AK::EVENTS::START_LOOP);
+	App->audio->PlayEvent(AK::EVENTS::START_LOOP, music->emitter);
+	AudioEmitter* carMusic = (AudioEmitter*)car->GetComponent(ComponentType::AUDIO_EMITTER);
+	carMusic->SetID(AK::EVENTS::PLAYMOVINGOBJ);
+	App->audio->PlayEvent(AK::EVENTS::PLAYMOVINGOBJ, carMusic->emitter);
+}
+
+void ModuleScene::StopSceneAudioEvents()
+{
+	AudioEmitter* music = (AudioEmitter*)MusicTest->GetComponent(ComponentType::AUDIO_EMITTER);
+	App->audio->StopEvent(AK::EVENTS::START_LOOP, music->emitter);
+	AudioEmitter* carMusic = (AudioEmitter*)car->GetComponent(ComponentType::AUDIO_EMITTER);
+	App->audio->StopEvent(AK::EVENTS::PLAYMOVINGOBJ, carMusic->emitter);
 }

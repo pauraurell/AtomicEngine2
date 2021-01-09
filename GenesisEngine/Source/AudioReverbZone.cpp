@@ -40,21 +40,21 @@ void AudioReverbZone::Update()
 	glLineWidth(1.0f);
 	glColor3f(1.0f, 0.0f, 1.0f);
 
-	int num_vertex = 20;
-	float a = 360.f / (float)num_vertex * DEGTORAD;
+	float a = (360.f/20.0f) * DEGTORAD;
 
 	glBegin(GL_LINE_LOOP);
-	for (unsigned int i = 0; i < num_vertex; i++)
+	for (unsigned int i = 0; i < 20; i++)
 		glVertex3f(cos(a * i) * sphere.r + sphere.pos.x, sphere.pos.y, sin(a * i) * sphere.r + sphere.pos.z);
 	glEnd();
 	glBegin(GL_LINE_LOOP);
-	for (unsigned int i = 0; i < num_vertex; i++)
+	for (unsigned int i = 0; i < 20; i++)
 		glVertex3f(cos(a * i) * sphere.r + sphere.pos.x, sin(a * i) * sphere.r + sphere.pos.y, sphere.pos.z);
 	glEnd();
 	glBegin(GL_LINE_LOOP);
-	for (unsigned int i = 0; i < num_vertex; i++)
+	for (unsigned int i = 0; i < 20; i++)
 		glVertex3f(sphere.pos.x, sin(a * i) * sphere.r + sphere.pos.y, cos(a * i) * sphere.r + sphere.pos.z);
 	glEnd();
+
 }
 
 void AudioReverbZone::OnEditor()

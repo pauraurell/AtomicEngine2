@@ -17,4 +17,5 @@ public:
 
 	float r;
 	math::Sphere sphere;
+	math::Rect rect;
 };

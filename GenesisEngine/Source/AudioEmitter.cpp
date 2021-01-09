@@ -32,12 +32,25 @@ void AudioEmitter::Save(GnJSONArray& save_array)
 {
 	GnJSONObj save_object;
 	save_object.AddInt("Type", type);
+	save_object.AddInt("priority", *priority);
+	save_object.AddFloat("volume", *volume);
+	save_object.AddInt("pitch", *pitch);
+	save_object.AddBool("bypass_reverb_zones", bypass_reverb_zones);
+	save_object.AddBool("play_on_awake", play_on_awake);
+	save_object.AddBool("loop", loop);
+	save_object.AddBool("mute", mute);
 	save_array.AddObject(save_object);
 }
 
 void AudioEmitter::Load(GnJSONObj& load_object)
 {
-
+	*priority = load_object.GetInt("priority");
+	*volume = load_object.GetFloat("volume");
+	*pitch = load_object.GetInt("pitch");
+	bypass_reverb_zones = load_object.GetBool("bypass_reverb_zones");
+	play_on_awake = load_object.GetBool("play_on_awake");
+	loop = load_object.GetBool("loop");
+	mute = load_object.GetBool("mute");
 }
 
 void AudioEmitter::Update()

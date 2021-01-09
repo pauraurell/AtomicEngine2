@@ -39,6 +39,9 @@ public:
 
 	void BackgroundMusicLoop();
 
+	void StartSceneAudioEvents();
+	void StopSceneAudioEvents();
+
 public:
 	bool show_grid;
 	GameObject* selectedGameObject;
