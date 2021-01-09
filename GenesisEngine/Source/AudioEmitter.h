@@ -20,6 +20,7 @@ public:
 
 	AudioObject* emitter = nullptr;
 	AkGameObjectID id = 0;
+	AkRtpcID distanceId = 0;
 	bool mute;
 	bool bypass_reverb_zones;
 	bool play_on_awake;

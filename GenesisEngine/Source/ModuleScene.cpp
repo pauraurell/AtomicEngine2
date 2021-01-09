@@ -8,6 +8,7 @@
 #include "GameObject.h"
 #include "Component.h"
 #include "Transform.h"
+#include "Camera.h"
 #include "ModuleWwise.h"
 #include "AK/Wwise_IDs.h"
 #include "AK/SpatialAudio/Common/AkSpatialAudio.h"
@@ -37,7 +38,7 @@ bool ModuleScene::Start()
 	car = AddGameObject(App->resources->RequestGameObject("Assets/Models/car/FuzzyRed.fbx"));
 	car->AddComponent(ComponentType::AUDIO_EMITTER);
 	AudioEmitter* carMusic = (AudioEmitter*)car->GetComponent(ComponentType::AUDIO_EMITTER);
-
+	carMusic->distanceId = AK::GAME_PARAMETERS::RTPC_DISTANCE;
 	
 	camera = new GameObject();
 	camera->AddComponent(ComponentType::CAMERA);
@@ -81,6 +82,12 @@ update_status ModuleScene::Update(float dt)
 	}
 
 	HandleInput();
+
+	float dis = sqrt(App->camera->GetCamera()->GetPosition().DistanceSq(car->GetTransform()->_position));
+	if (dis > 100) { dis = 100; }
+	AudioEmitter* carMusic = (AudioEmitter*)car->GetComponent(ComponentType::AUDIO_EMITTER);
+	AkRtpcValue distanceValue = dis;
+	AKRESULT result = AK::SoundEngine::SetRTPCValue(carMusic->distanceId, distanceValue);
 
 	root->Update();
 
