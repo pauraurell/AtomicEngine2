@@ -36,5 +36,19 @@
 				</File>
 			</IncludedMemoryFiles>
 		</SoundBank>
+		<SoundBank Id="2360670616" Language="SFX">
+			<ObjectPath>\SoundBanks\Default Work Unit\Atomic2</ObjectPath>
+			<ShortName>Atomic2</ShortName>
+			<Path>Atomic2.bnk</Path>
+			<IncludedEvents>
+				<Event Id="3277656012" Name="PlayMovingObj" ObjectPath="\Events\Default Work Unit\PlayMovingObj"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="134046027" Language="SFX">
+					<ShortName>YUNG BEEF - SU CURA (FULLDISCO.ORG).wav</ShortName>
+					<Path>SFX\YUNG BEEF - SU CURA (FULLDISCO.ORG)_F17FB28C.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
 	</SoundBanks>
 </SoundBanksInfo>
