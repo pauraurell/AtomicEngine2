@@ -37,6 +37,8 @@ void AudioListener::Load(GnJSONObj& load_object)
 void AudioListener::Update()
 {
 	float3 position = App->camera->GetCamera()->GetFrustum().pos;
+	position.x = -position.x;
+	position.z = -position.z;
 	float3 front = App->camera->GetCamera()->GetFrustum().front;
 	float3 up = App->camera->GetCamera()->GetFrustum().up;
 	listener->SetPos(position, front, up);

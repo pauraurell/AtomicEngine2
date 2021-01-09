@@ -58,6 +58,8 @@ void AudioEmitter::Load(GnJSONObj& load_object)
 void AudioEmitter::Update()
 {
 	float3 Position = _gameObject->GetTransform()->GetPosition();
+	Position.x = -Position.x;
+	Position.z = -Position.z;
 	emitter->SetPos(Position, { 1,0,0 }, {0,1,0});
 	//_gameObject->GetTransform()->SetPosition(Position.x, Position.y, Position.z);
 }
