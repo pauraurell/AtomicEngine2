@@ -83,11 +83,11 @@ update_status ModuleScene::Update(float dt)
 
 	HandleInput();
 
-	float dis = sqrt(App->camera->GetCamera()->GetPosition().DistanceSq(car->GetTransform()->_position));
+	/*float dis = sqrt(App->camera->GetCamera()->GetPosition().DistanceSq(car->GetTransform()->_position));
 	if (dis > 100) { dis = 100; }
 	AudioEmitter* carMusic = (AudioEmitter*)car->GetComponent(ComponentType::AUDIO_EMITTER);
 	AkRtpcValue distanceValue = dis;
-	AKRESULT result = AK::SoundEngine::SetRTPCValue(carMusic->distanceId, distanceValue);
+	AKRESULT result = AK::SoundEngine::SetRTPCValue(carMusic->distanceId, distanceValue);*/
 
 	root->Update();
 
