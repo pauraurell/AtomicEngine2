@@ -25,13 +25,15 @@ void AudioReverbZone::Save(GnJSONArray& save_array)
 {
 	GnJSONObj save_object;
 	save_object.AddInt("Type", type);
+	save_object.AddFloat("R", r);
 	save_array.AddObject(save_object);
 }
 
 void AudioReverbZone::Load(GnJSONObj& load_object)
 {
-
+	r = load_object.GetFloat("R");
 }
+
 
 void AudioReverbZone::Update()
 {

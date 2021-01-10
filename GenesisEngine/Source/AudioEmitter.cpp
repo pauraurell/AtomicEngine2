@@ -92,16 +92,11 @@ void AudioEmitter::OnEditor()
 	if (ImGui::CollapsingHeader("Audio Emitter", ImGuiTreeNodeFlags_DefaultOpen))
 	{
 		ImGui::Checkbox("Enabled", &enabled);
-
-		ImGui::Separator();
-		ImGui::Spacing();
 		
-		if(ImGui::Checkbox("Mute", &mute))
+		ImGui::Checkbox("Mute", &mute);
 
-		ImGui::Checkbox("Loop", &loop);
 		ImGui::Checkbox("Bypass Reverb Zones", &bypass_reverb_zones);
 
-		ImGui::DragInt("Priority", priority, 1, 0, 256);
 		if (ImGui::DragFloat("Volume", &emitter->volume, 0.01, 0, 1))
 		{
 			emitter->SetVolume(id, emitter->volume);

@@ -4,6 +4,7 @@
 #include "AK/Wwise_IDs.h"
 #include "GameObject.h"
 #include "Transform.h"
+#include "AudioEmitter.h"
 
 ModuleAudio::ModuleAudio(bool start_enabled) : Module(start_enabled){}
 
@@ -15,6 +16,7 @@ bool ModuleAudio::Start()
 	ModuleWwise::InitSoundEngine();
 	LoadBank("AtomicSoundBank.bnk");
 	LoadBank("Atomic2.bnk");
+	LoadBank("Atomic3.bnk");
 	return true;
 }
 
@@ -87,4 +89,20 @@ void ModuleAudio::ResumeEvent(uint id, AudioObject* obj)
 void ModuleAudio::StopEvent(uint id, AudioObject* obj)
 {
 	AK::SoundEngine::ExecuteActionOnEvent(id, AK::SoundEngine::AkActionOnEventType::AkActionOnEventType_Stop, obj->ObjectId);
+}
+
+void ModuleAudio::ResumeEvents()
+{
+	for (int i = 0; i < audio_emitters.size(); i++)
+	{
+		PlayEvent(AK::EVENTS::RESUMEALL, audio_emitters[i]->emitter);
+	}
+}
+
+void ModuleAudio::PauseEvents()
+{
+	for (int i = 0; i < audio_emitters.size(); i++)
+	{
+		PlayEvent(AK::EVENTS::PAUSEALL, audio_emitters[i]->emitter);
+	}
 }

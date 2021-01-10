@@ -456,23 +456,40 @@ void Editor::ShowGameButtons()
 		if (App->in_game == false)
 		{
 			if (ImGui::Button("Play", ImVec2(40, 20)))
+			{
 				App->StartGame();
+				App->paused = false;
+			}
 		}
+
 		else {
 			if (ImGui::Button("Stop", ImVec2(40, 20)))
+			{
 				App->StopGame();
+				App->paused = false;
+			}
+			
 		}
 
 		ImGui::NextColumn();
 		if (Time::gameClock.paused) 
 		{
 			if (ImGui::Button("Resume", ImVec2(45, 20)))
+			{
 				Time::gameClock.Resume();
+				App->paused = false;
+				App->audio->ResumeEvents();
+			}
 		}
 		else 
 		{
-			if (ImGui::Button("Pause", ImVec2(45, 20))) 
+			if (ImGui::Button("Pause", ImVec2(45, 20)))
+			{
 				Time::gameClock.Pause();
+				App->paused = true;
+				App->audio->PauseEvents();
+			}
+				
 		}
 
 	}

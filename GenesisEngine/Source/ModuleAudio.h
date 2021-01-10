@@ -27,6 +27,8 @@ public:
 	void PauseEvent(uint id, AudioObject* obj);
 	void ResumeEvent(uint id, AudioObject* obj);
 	void StopEvent(uint id, AudioObject* obj);
+	void PauseEvents();
+	void ResumeEvents();
 
 	void LoadBank(const char* sound_bank);
 

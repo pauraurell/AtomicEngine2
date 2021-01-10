@@ -85,7 +85,13 @@ update_status ModuleScene::Update(float dt)
 
 	if (root->GetChildByName("Background Music") != nullptr) { BackgroundMusicLoop(); }
 
-	if (App->in_game && root->GetChildByName("Car") != nullptr) { MoveObject(root->GetChildByName("Car"), 0.1); }
+	if (App->in_game && root->GetChildByName("Car") != nullptr) 
+	{ 
+		if (App->paused == false) 
+		{ 
+			MoveObject(root->GetChildByName("Car"), 0.1); 
+		}
+	}
 
 	return UPDATE_CONTINUE;
 }
@@ -289,29 +295,29 @@ bool ModuleScene::LoadConfig(GnJSONObj& config)
 void ModuleScene::MoveObject(GameObject* obj, float speed)
 {
 	Transform* transform = (Transform*)obj->GetComponent(ComponentType::TRANSFORM);
-	if (transform->_position.x < 20 && transform->_position.z <= 0) 
-	{
-		transform->_position.x = transform->_position.x + speed; 
-		obj->GetChildAt(0)->GetTransform()->SetRotation(-90, 0, 90);
-	}
-	
-	else if (transform->_position.x > 20) 
-	{
-		transform->_position.z = transform->_position.z + speed;
-		obj->GetChildAt(0)->GetTransform()->SetRotation(-90, 0, 0);
-	} 
-	if (transform->_position.z > 20 && transform->_position.x > 0) 
-	{
-		transform->_position.x = transform->_position.x - speed;
-		obj->GetChildAt(0)->GetTransform()->SetRotation(-90, 0, 270);
-	} 
-	else if (transform->_position.x < 0) 
-	{
-		transform->_position.z = transform->_position.z - speed;
-		obj->GetChildAt(0)->GetTransform()->SetRotation(-90, 0, 180);
-	}
-	transform->UpdateGlobalTransform();
-	obj->UpdateChildrenTransforms();
+		if (transform->_position.x < 20 && transform->_position.z <= 0)
+		{
+			transform->_position.x = transform->_position.x + speed;
+			obj->GetChildAt(0)->GetTransform()->SetRotation(-90, 0, 90);
+		}
+
+		else if (transform->_position.x > 20)
+		{
+			transform->_position.z = transform->_position.z + speed;
+			obj->GetChildAt(0)->GetTransform()->SetRotation(-90, 0, 0);
+		}
+		if (transform->_position.z > 20 && transform->_position.x > 0)
+		{
+			transform->_position.x = transform->_position.x - speed;
+			obj->GetChildAt(0)->GetTransform()->SetRotation(-90, 0, 270);
+		}
+		else if (transform->_position.x < 0)
+		{
+			transform->_position.z = transform->_position.z - speed;
+			obj->GetChildAt(0)->GetTransform()->SetRotation(-90, 0, 180);
+		}
+		transform->UpdateGlobalTransform();
+		obj->UpdateChildrenTransforms();
 }
 
 void ModuleScene::BackgroundMusicLoop()

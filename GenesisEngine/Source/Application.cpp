@@ -77,7 +77,6 @@ bool Application::Init()
 	{
 		ret = modules_vector[i]->Start();
 	}
-	
 
 	config.Release();
 	RELEASE_ARRAY(buffer);

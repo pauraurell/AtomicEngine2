@@ -58,6 +58,7 @@ public:
 	const char* engine_name;
 	const char* engine_version;
 	bool in_game;
+	bool paused;
 
 public:
 
