@@ -55,6 +55,7 @@ void AudioEmitter::Save(GnJSONArray& save_array)
 	save_object.AddBool("play_on_awake", play_on_awake);
 	save_object.AddBool("loop", loop);
 	save_object.AddBool("mute", mute);
+	save_object.AddFloat("reverbId", reverbId);
 	save_array.AddObject(save_object);
 }
 
@@ -67,6 +68,7 @@ void AudioEmitter::Load(GnJSONObj& load_object)
 	play_on_awake = load_object.GetBool("play_on_awake");
 	loop = load_object.GetBool("loop");
 	mute = load_object.GetBool("mute");
+	reverbId = load_object.GetFloat("reverbId");
 }
 
 void AudioEmitter::Update()
