@@ -391,6 +391,7 @@ void ModuleScene::CreateInitialScene()
 	TunnelEffect->GetChildByName("Tube001")->GetTransform()->SetPosition(float3(-5.663f, -59.86f, 0.267f));
 	//Material* tunnelMat = (Material*)TunnelEffect->AddComponent(ComponentType::MATERIAL);
 	//tunnelMat->SetTexture((ResourceTexture*)App->resources->RequestResource(App->resources->ImportFile("Assets/Textures/tunel.png")));
+	TunnelEffect->GetTransform()->SetGlobalTransform(TunnelEffect->GetTransform()->GetGlobalTransform());
 
 	GameObject* car = new GameObject();
 	car = AddGameObject(App->resources->RequestGameObject("Assets/Models/car/FuzzyRed.fbx"));
@@ -409,4 +410,5 @@ void ModuleScene::CreateInitialScene()
 	rayanMusic->reverbId = AK::GAME_PARAMETERS::RTPC_REVERB2;
 	Rayan->SetName("Rayan");
 	Rayan->GetTransform()->SetPosition(float3(-15.82f, 0.0f, 19.731f));
+	Rayan->GetTransform()->SetGlobalTransform(Rayan->GetTransform()->GetGlobalTransform());
 }
