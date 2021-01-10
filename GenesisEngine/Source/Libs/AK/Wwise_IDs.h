@@ -14,6 +14,8 @@ namespace AK
     namespace EVENTS
     {
         static const AkUniqueID PLAYMOVINGOBJ = 3277656012U;
+        static const AkUniqueID SETREVERBOFF = 239574670U;
+        static const AkUniqueID SETREVERBON = 2297615984U;
         static const AkUniqueID SONG1_TO_2 = 655376382U;
         static const AkUniqueID SONG2_TO_1 = 2114273916U;
         static const AkUniqueID START_LOOP = 1714347020U;
@@ -22,6 +24,7 @@ namespace AK
     namespace GAME_PARAMETERS
     {
         static const AkUniqueID RTPC_DISTANCE = 262290038U;
+        static const AkUniqueID RTPC_REVERB = 4143461479U;
         static const AkUniqueID SS_AIR_FEAR = 1351367891U;
         static const AkUniqueID SS_AIR_FREEFALL = 3002758120U;
         static const AkUniqueID SS_AIR_FURY = 1029930033U;
@@ -45,6 +48,11 @@ namespace AK
     {
         static const AkUniqueID MASTER_AUDIO_BUS = 3803692087U;
     } // namespace BUSSES
+
+    namespace AUX_BUSSES
+    {
+        static const AkUniqueID REVERB = 348963605U;
+    } // namespace AUX_BUSSES
 
     namespace AUDIO_DEVICES
     {

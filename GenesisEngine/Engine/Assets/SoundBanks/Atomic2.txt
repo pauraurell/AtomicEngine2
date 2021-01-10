@@ -1,8 +1,14 @@
 Event	ID	Name			Wwise Object Path	Notes
+	239574670	SetReverbOff			\Default Work Unit\SetReverbOff	
+	2297615984	SetReverbOn			\Default Work Unit\SetReverbOn	
 	3277656012	PlayMovingObj			\Default Work Unit\PlayMovingObj	
 
 Game Parameter	ID	Name			Wwise Object Path	Notes
 	262290038	RTPC_DISTANCE			\Default Work Unit\RTPC_DISTANCE	
+	4143461479	RTPC_REVERB			\Default Work Unit\RTPC_REVERB	
+
+Effect plug-ins	ID	Name	Type				Notes
+	3216246379	Space_Dreaming	Wwise RoomVerb			
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	1053568235	YUNG BEEF - SU CURA (FULLDISCO_ORG)	D:\Audiokinetic\Projects\AudioEngine\.cache\Windows\SFX\Motors de Videojocs\YUNG BEEF - SU CURA (FULLDISCO.ORG)_F17FB28C.wem		\Actor-Mixer Hierarchy\Default Work Unit\Motors de Videojocs\YUNG BEEF - SU CURA (FULLDISCO_ORG)		35619904

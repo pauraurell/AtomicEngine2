@@ -71,6 +71,16 @@
       "Id": "3277656012",
       "Name": "PlayMovingObj",
       "ObjectPath": "\\Events\\Default Work Unit\\PlayMovingObj"
+     },
+     {
+      "Id": "239574670",
+      "Name": "SetReverbOff",
+      "ObjectPath": "\\Events\\Default Work Unit\\SetReverbOff"
+     },
+     {
+      "Id": "2297615984",
+      "Name": "SetReverbOn",
+      "ObjectPath": "\\Events\\Default Work Unit\\SetReverbOn"
      }
     ],
     "IncludedMemoryFiles": [

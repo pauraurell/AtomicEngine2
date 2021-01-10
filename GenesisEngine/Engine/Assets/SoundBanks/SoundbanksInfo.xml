@@ -42,6 +42,8 @@
 			<Path>Atomic2.bnk</Path>
 			<IncludedEvents>
 				<Event Id="3277656012" Name="PlayMovingObj" ObjectPath="\Events\Default Work Unit\PlayMovingObj"/>
+				<Event Id="239574670" Name="SetReverbOff" ObjectPath="\Events\Default Work Unit\SetReverbOff"/>
+				<Event Id="2297615984" Name="SetReverbOn" ObjectPath="\Events\Default Work Unit\SetReverbOn"/>
 			</IncludedEvents>
 			<IncludedMemoryFiles>
 				<File Id="1053568235" Language="SFX">
