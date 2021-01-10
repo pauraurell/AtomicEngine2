@@ -3,7 +3,7 @@
 Atomic Engine 2 is a game engine made in C and C++ for the 3rd assignment of the Game Engines subject in CITM. 
 We created a basic 3D Engine and a Audio subsystem integrating Wwise.
 We forked Marc Pagès's Genesis Engine as starting point for this assignment.
-Marc Pagès's Genesis Engine: https://github.com/marcpages2020/GenesisEngine
+Marc Pagès's [Genesis Engine](https://github.com/marcpages2020/GenesisEngine)
 
 ## Who are we?
 
@@ -37,7 +37,7 @@ In the demo scene there are two game objects with spatial audio, a background mu
 [![IMG](https://img.youtube.com/vi/YJ7yxsC5ZrA/0.jpg)](https://www.youtube.com/watch?v=YJ7yxsC5ZrA)
 
 ## Release
-Atomic Engine 2 v1.0 Release: https://github.com/pauraurell/AtomicEngine2/releases/tag/v1.0
+Atomic Engine 2 v1.0 Release [link](https://github.com/pauraurell/AtomicEngine2/releases/tag/v1.0 "Click here")
 
 ## Licence
 
