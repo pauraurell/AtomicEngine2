@@ -73,6 +73,34 @@
       "ObjectPath": "\\Events\\Default Work Unit\\PlayMovingObj"
      },
      {
+      "Id": "4290004840",
+      "Name": "PlayStaticObj",
+      "ObjectPath": "\\Events\\Default Work Unit\\PlayStaticObj"
+     }
+    ],
+    "IncludedMemoryFiles": [
+     {
+      "Id": "663330264",
+      "Language": "SFX",
+      "ShortName": "Motors de Videojocs\\Kaydy Cain - Si No Me Das Tu Corazón Te Lo Robo (FULLDISCO.ORG).wav",
+      "Path": "SFX\\Motors de Videojocs\\Kaydy Cain - Si No Me Das Tu Corazón Te Lo Robo (FULLDISCO.ORG)_1C9C67B2.wem"
+     },
+     {
+      "Id": "664161281",
+      "Language": "SFX",
+      "ShortName": "Car-Driving-Slow.wav",
+      "Path": "SFX\\Car-Driving-Slow_F17FB28C.wem"
+     }
+    ]
+   },
+   {
+    "Id": "2360670617",
+    "Language": "SFX",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\Atomic3",
+    "ShortName": "Atomic3",
+    "Path": "Atomic3.bnk",
+    "IncludedEvents": [
+     {
       "Id": "239574670",
       "Name": "SetReverbOff",
       "ObjectPath": "\\Events\\Default Work Unit\\SetReverbOff"
@@ -81,14 +109,6 @@
       "Id": "2297615984",
       "Name": "SetReverbOn",
       "ObjectPath": "\\Events\\Default Work Unit\\SetReverbOn"
-     }
-    ],
-    "IncludedMemoryFiles": [
-     {
-      "Id": "1053568235",
-      "Language": "SFX",
-      "ShortName": "Motors de Videojocs\\YUNG BEEF - SU CURA (FULLDISCO.ORG).wav",
-      "Path": "SFX\\Motors de Videojocs\\YUNG BEEF - SU CURA (FULLDISCO.ORG)_F17FB28C.wem"
      }
     ]
    }

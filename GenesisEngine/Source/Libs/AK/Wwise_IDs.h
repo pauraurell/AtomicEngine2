@@ -14,6 +14,7 @@ namespace AK
     namespace EVENTS
     {
         static const AkUniqueID PLAYMOVINGOBJ = 3277656012U;
+        static const AkUniqueID PLAYSTATICOBJ = 4290004840U;
         static const AkUniqueID SETREVERBOFF = 239574670U;
         static const AkUniqueID SETREVERBON = 2297615984U;
         static const AkUniqueID SONG1_TO_2 = 655376382U;
@@ -25,6 +26,7 @@ namespace AK
     {
         static const AkUniqueID RTPC_DISTANCE = 262290038U;
         static const AkUniqueID RTPC_REVERB = 4143461479U;
+        static const AkUniqueID RTPC_REVERB2 = 800751127U;
         static const AkUniqueID SS_AIR_FEAR = 1351367891U;
         static const AkUniqueID SS_AIR_FREEFALL = 3002758120U;
         static const AkUniqueID SS_AIR_FURY = 1029930033U;
@@ -41,6 +43,7 @@ namespace AK
     {
         static const AkUniqueID INIT = 1355168291U;
         static const AkUniqueID ATOMIC2 = 2360670616U;
+        static const AkUniqueID ATOMIC3 = 2360670617U;
         static const AkUniqueID ATOMICSOUNDBANK = 2243015577U;
     } // namespace BANKS
 

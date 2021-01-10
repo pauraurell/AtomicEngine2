@@ -1,0 +1,4 @@
+Event	ID	Name			Wwise Object Path	Notes
+	239574670	SetReverbOff			\Default Work Unit\SetReverbOff	
+	2297615984	SetReverbOn			\Default Work Unit\SetReverbOn	
+

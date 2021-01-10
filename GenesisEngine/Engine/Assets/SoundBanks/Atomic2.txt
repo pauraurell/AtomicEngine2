@@ -1,14 +1,16 @@
 Event	ID	Name			Wwise Object Path	Notes
-	239574670	SetReverbOff			\Default Work Unit\SetReverbOff	
-	2297615984	SetReverbOn			\Default Work Unit\SetReverbOn	
 	3277656012	PlayMovingObj			\Default Work Unit\PlayMovingObj	
+	4290004840	PlayStaticObj			\Default Work Unit\PlayStaticObj	
 
 Game Parameter	ID	Name			Wwise Object Path	Notes
+	800751127	RTPC_REVERB2			\Default Work Unit\RTPC_REVERB2	
 	4143461479	RTPC_REVERB			\Default Work Unit\RTPC_REVERB	
 
 Effect plug-ins	ID	Name	Type				Notes
+	862329411	Space_Dreaming2	Wwise RoomVerb			
 	3216246379	Space_Dreaming	Wwise RoomVerb			
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	1053568235	YUNG BEEF - SU CURA (FULLDISCO_ORG)	D:\Audiokinetic\Projects\AudioEngine\.cache\Windows\SFX\Motors de Videojocs\YUNG BEEF - SU CURA (FULLDISCO.ORG)_F17FB28C.wem		\Actor-Mixer Hierarchy\Default Work Unit\Motors de Videojocs\YUNG BEEF - SU CURA (FULLDISCO_ORG)		35619904
+	663330264	Kaydy Cain - Si No Me Das Tu Corazón Te Lo Robo (FULLDISCO_ORG)	D:\Audiokinetic\Projects\AudioEngine\.cache\Windows\SFX\Motors de Videojocs\Kaydy Cain - Si No Me Das Tu Corazón Te Lo Robo (FULLDISCO.ORG)_1C9C67B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Motors de Videojocs\Kaydy Cain - Si No Me Das Tu Corazón Te Lo Robo (FULLDISCO_ORG)		37887040
+	664161281	Car-Driving-Slow	D:\Audiokinetic\Projects\AudioEngine\.cache\Windows\SFX\Car-Driving-Slow_F17FB28C.wem		\Actor-Mixer Hierarchy\Default Work Unit\Motors de Videojocs\Car-Driving-Slow		4230208
 
