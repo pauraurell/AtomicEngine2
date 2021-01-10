@@ -19,8 +19,9 @@ public:
 	void SetID(AkGameObjectID id);
 
 	AudioObject* emitter = nullptr;
-	AkGameObjectID id = 0;
-	AkRtpcID distanceId = 0;
+	AkGameObjectID id;
+	AkRtpcID distanceId;
+	AkRtpcID reverbId;
 	bool mute = false;
 	bool bypass_reverb_zones;
 	bool play_on_awake;

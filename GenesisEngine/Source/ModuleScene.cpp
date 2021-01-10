@@ -61,7 +61,9 @@ bool ModuleScene::Start()
 	car = AddGameObject(App->resources->RequestGameObject("Assets/Models/car/FuzzyRed.fbx"));
 	car->AddComponent(ComponentType::AUDIO_EMITTER);
 	AudioEmitter* carMusic = (AudioEmitter*)car->GetComponent(ComponentType::AUDIO_EMITTER);
+	carMusic->bypass_reverb_zones = false;
 	carMusic->distanceId = AK::GAME_PARAMETERS::RTPC_DISTANCE;
+	carMusic->reverbId = AK::GAME_PARAMETERS::RTPC_REVERB;
 	car->SetName("Car");
 
 	return ret;

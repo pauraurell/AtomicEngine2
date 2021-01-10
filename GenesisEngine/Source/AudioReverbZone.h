@@ -1,6 +1,7 @@
 #pragma once
 #include "Globals.h"
 #include "Component.h"
+#include "AudioEmitter.h"
 #include <vector>;
 #include "MathGeoLib\include\MathGeoLib.h"
 
@@ -18,6 +19,8 @@ public:
 	virtual void OnEditor() override;
 
 	bool ContainsSource();
+	float CalculateReverbValue(float3 emitterPos);
+	void Reverb(float d, AudioEmitter* emitter);
 
 	float r;
 	math::Sphere reverb_sphere;

@@ -72,19 +72,47 @@ void AudioReverbZone::OnEditor()
 bool AudioReverbZone::ContainsSource()
 {
 	bool ret = false;
+	float reverbValue = 0;
 
 	for (int i = 0; i < App->audio->audio_emitters.size(); i++)
 	{
 		Transform* transform = (Transform*)App->audio->audio_emitters[i]->_gameObject->GetComponent(ComponentType::TRANSFORM);
 		if (transform != nullptr) 
 		{
-			float3 point = transform->GetPosition();
-			//const char* name = App->audio->audio_emitters[i]->_gameObject->name.c_str();
-			if (reverb_sphere.Contains(point)) 
-			{ 
-				ret = true; 
+			AudioEmitter* emitter = (AudioEmitter*)App->audio->audio_emitters[i]->_gameObject->GetComponent(ComponentType::AUDIO_EMITTER);
+			if (emitter->bypass_reverb_zones == false)
+			{
+				float3 point = transform->GetPosition();
+				//const char* name = App->audio->audio_emitters[i]->_gameObject->name.c_str();
+				if (reverb_sphere.Contains(point))
+				{
+					ret = true;
+					reverbValue = CalculateReverbValue(App->audio->audio_emitters[i]->_gameObject->GetTransform()->GetPosition());
+				}
+				else { ret = false; }
+
+				Reverb(reverbValue, App->audio->audio_emitters[i]);
 			}
 		}
 	}
 	return ret;
+}
+
+float AudioReverbZone::CalculateReverbValue(float3 emitterPos)
+{
+	float reverbValue;
+	float dis = sqrt(emitterPos.DistanceSq(this->_gameObject->GetTransform()->GetPosition()));
+	reverbValue = dis / r;
+	reverbValue = 1 - reverbValue;
+
+	return reverbValue;
+}
+
+void AudioReverbZone::Reverb(float d, AudioEmitter* emitter)
+{
+	AkRtpcValue value = d;
+	if (emitter->reverbId != 0)
+	{
+		AKRESULT result = AK::SoundEngine::SetRTPCValue(emitter->reverbId, value);
+	}
 }

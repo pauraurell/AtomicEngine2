@@ -14,11 +14,14 @@ AudioEmitter::AudioEmitter(GameObject* gameObject) : Component(gameObject)
 	type = ComponentType::AUDIO_EMITTER;
 	volume = new float(1.0f);
 	mute = false;
-	bypass_reverb_zones = false;
+	bypass_reverb_zones = true;
 	play_on_awake = false;
 	loop = false;
 	priority = new int(128);
 	pitch = new float(0.0f);
+	id = 0;
+	distanceId = 0;
+	reverbId = 0;
 
 	emitter = App->audio->CreateSource(gameObject);
 	/*float3 Position = _gameObject->GetTransform()->GetPosition();
