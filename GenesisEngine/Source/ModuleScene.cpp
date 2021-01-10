@@ -85,7 +85,7 @@ update_status ModuleScene::Update(float dt)
 
 	if (root->GetChildByName("Background Music") != nullptr) { BackgroundMusicLoop(); }
 
-	if (App->in_game) { MoveObject(root->GetChildByName("Car"), 0.1); }
+	if (App->in_game && root->GetChildByName("Car") != nullptr) { MoveObject(root->GetChildByName("Car"), 0.1); }
 
 	return UPDATE_CONTINUE;
 }
