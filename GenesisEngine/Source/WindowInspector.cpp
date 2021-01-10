@@ -48,11 +48,11 @@ void WindowInspector::Draw()
 				}
 				ImGui::CloseCurrentPopup();
 			}
-			if (ImGui::MenuItem("Audio Listener..."))
+			if (ImGui::MenuItem("Reverb Zone..."))
 			{
-				if (App->scene->selectedGameObject->GetComponent(ComponentType::AUDIO_LISTENER) == nullptr)
+				if (App->scene->selectedGameObject->GetComponent(ComponentType::AUDIO_REVERB_ZONE) == nullptr)
 				{
-					App->scene->selectedGameObject->AddComponent(ComponentType::AUDIO_LISTENER);
+					App->scene->selectedGameObject->AddComponent(ComponentType::AUDIO_REVERB_ZONE);
 				}
 				ImGui::CloseCurrentPopup();
 			}

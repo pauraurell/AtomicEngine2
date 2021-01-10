@@ -4,7 +4,6 @@ Event	ID	Name			Wwise Object Path	Notes
 	3277656012	PlayMovingObj			\Default Work Unit\PlayMovingObj	
 
 Game Parameter	ID	Name			Wwise Object Path	Notes
-	262290038	RTPC_DISTANCE			\Default Work Unit\RTPC_DISTANCE	
 	4143461479	RTPC_REVERB			\Default Work Unit\RTPC_REVERB	
 
 Effect plug-ins	ID	Name	Type				Notes
