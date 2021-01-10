@@ -1,9 +1,12 @@
-# Genesis Engine v0.2
-  Genesis Engine is a game engine made in C and C++ for learning purposes. I'm Marc Pagès Francesch, 
-  a Game Development Student in CITM (Terrassa, Catalonia, Spain).
+# Atomic Engine 2
+  Atomic Engine 2 is a game engine made in C and C++ for the 3rd assignment of the Game Engines subject in CITM. 
+  Pau Raurell: https://github.com/pauraurell
+  Pol Galan: https://github.com/pgalmor
+  Our Repository: https://github.com/pauraurell/AtomicEngine2
 
-  Engine GitHub page: https://github.com/marcpages2020/GenesisEngine
-  My personal GitHub profile: https://github.com/marcpages2020
+  We forked Marc Pagès's Genesis Engine as starting point for this assignment.
+  Marc Pagès: https://github.com/marcpages2020
+  Genesis Engine: https://github.com/marcpages2020/GenesisEngine
 
 ## Controls: 
  
@@ -59,16 +62,26 @@ There are plenty of importing options specially for textures. When the file is d
 
  ## Additional functionality
 
- ### First Assignment
+ ### First Assignment (by Marc Pagès)
  - The engine settings are loaded directly from a JSON file named config and located in GenesisEngine/Assets/Config. 
    this settings include the modules values and which windows are opened on start. 
  - When and FBX is loaded the hierarchy of the objects is mantained and the name of the objects in the FBX will be assigned
    to the new Game Object.  
  - Objects can be deleted selecting them and pressing SUPR.  
 
-## Second Assignment
+## Second Assignment (by Marc Pagès)
  - Scenes can be saved with custom name and overwritten by just clicking on them.
  - Textures can be previewed in the assets window. 
  - Interactive path in assets window which lets the user move easilly bacwards in the file or folder path. 
  - Meshes can be selected individually from inside a model pushing the arrow next to the file in the assets window. 
  - Inside the configuration window there is an option under the resources tab which lets you delete all meta files and library files at shutdown so projects can be cleaned before releases or sending to mates. 
+ 
+ ## Third Assignment
+ 
+ - Game Objects can have 3 new components: Audio Emitter, Audio Listener and Reverb Zone component.
+ - The scene starts with a background music that loops between two songs.
+ - There is a static object and a dynamic object with spatial audio.
+ - Also there is a Reverb zone in the tunnel.
+ - Wwise Sound Banks can be loaded.
+ - Events can be played, stopped, paused and resumed. 
+ - Reverb Zone is defined by a sphere and as long as the emitter gets closer to its center the reverb effect increases.
