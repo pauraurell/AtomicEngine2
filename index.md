@@ -1,37 +1,28 @@
-# Welcome to GitHub Pages
+## What is Atomic Engine 2?
 
-You can use the [editor on GitHub](https://github.com/pauraurell/AtomicEngine2/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Atomic Engine 2 is a game engine made in C and C++ for the 3rd assignment of the Game Engines subject in CITM. 
+We created a basic 3D Engine and a Audio subsystem integrating Wwise.
+We forked Marc Pagès's Genesis Engine as starting point for this assignment.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Who are we?
 
-### Markdown
+### [Pau Raurell](https://github.com/pauraurell)
+![Photo]()
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### [Pol Galan(https://github.com/pgalmor)
+![Photo]()
 
-```markdown
-Syntax highlighted code block
+## Sub-systems
 
-# Header 1
-## Header 2
-### Header 3
+We have sub-systems such as a scene serialization system that allows us to save and load scenes, mouse picking, guizmos, camera culling, Game Objects that have components like Transform, Mesh, Material,
+Lights, Cameras...  
 
-- Bulleted
-- List
+## Audio Sub-system
 
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/pauraurell/AtomicEngine2/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+For the last assignment we created a Audio sub-system integrating Wwise to our Engine.
+This subsystem allows you to add 3 new components to a Game Object. The first one is the Audio Emitter, which is very similar to the Audio Source component
+in Unity and you can add this component to a Game Object that you want to be the source of a sound or music.
+Then we have the Listener component, without this one the audio that comes from the Emitter won't be listened. By default the camera has a Listener.
+The last one is the Reverb Zone and it is a sphere that if contains a Audio Emitter, the sound from that emitter gets reverbed more or less depending on 
+the distance to the center of the sphere.
+In the demo scene there are two game objects with spatial audio, a background music and a reverb zone. 
