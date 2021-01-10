@@ -37,7 +37,7 @@ In the demo scene there are two game objects with spatial audio, a background mu
 [![IMG](https://img.youtube.com/vi/YJ7yxsC5ZrA/0.jpg)](https://www.youtube.com/watch?v=YJ7yxsC5ZrA)
 
 ## Release
-Atomic Engine 2 v1.0 Release [link](https://github.com/pauraurell/AtomicEngine2/releases/tag/v1.0 "Click here")
+Atomic Engine 2 v1.0 Release [Click here](https://github.com/pauraurell/AtomicEngine2/releases/tag/v1.0)
 
 ## Licence
 
