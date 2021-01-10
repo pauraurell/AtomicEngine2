@@ -22,8 +22,8 @@ void WindowAbout::Draw()
 
 		ImGui::Text("Made by: ");
 		ImGui::SameLine();
-		if (ImGui::SmallButton("Marc Pages Francesch"))
-			ShellExecuteA(NULL, "open", "https://github.com/marcpages2020", NULL, NULL, SW_SHOWNORMAL);
+		if (ImGui::SmallButton("Pol Galan Morales & Pau Raurell Gomis"))
+			ShellExecuteA(NULL, "open", "https://github.com/pauraurell/AtomicEngine2", NULL, NULL, SW_SHOWNORMAL);
 
 
 		ImGui::Spacing();

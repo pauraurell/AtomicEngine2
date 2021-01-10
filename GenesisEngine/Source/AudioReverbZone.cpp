@@ -72,10 +72,10 @@ void AudioReverbZone::OnEditor()
 bool AudioReverbZone::ContainsSource()
 {
 	bool ret = false;
-	float reverbValue = 0;
 
 	for (int i = 0; i < App->audio->audio_emitters.size(); i++)
 	{
+		float reverbValue = 0;
 		Transform* transform = (Transform*)App->audio->audio_emitters[i]->_gameObject->GetComponent(ComponentType::TRANSFORM);
 		if (transform != nullptr) 
 		{
@@ -110,9 +110,10 @@ float AudioReverbZone::CalculateReverbValue(float3 emitterPos)
 
 void AudioReverbZone::Reverb(float d, AudioEmitter* emitter)
 {
-	AkRtpcValue value = d;
+	//AkRtpcValue value = d;
+	emitter->reverbValue = d;
 	if (emitter->reverbId != 0)
 	{
-		AKRESULT result = AK::SoundEngine::SetRTPCValue(emitter->reverbId, value);
+		AKRESULT result = AK::SoundEngine::SetRTPCValue(emitter->reverbId, emitter->reverbValue);
 	}
 }

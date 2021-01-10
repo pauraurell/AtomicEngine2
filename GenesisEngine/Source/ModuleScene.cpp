@@ -4,6 +4,7 @@
 #include "GnJSON.h"
 #include "Mesh.h"
 #include "AudioEmitter.h"
+#include "AudioReverbZone.h"
 #include "FileSystem.h"
 #include "GameObject.h"
 #include "Component.h"
@@ -41,30 +42,11 @@ bool ModuleScene::Start()
 	camera->AddComponent(ComponentType::CAMERA);
 	camera->AddComponent(ComponentType::AUDIO_LISTENER);
 	camera->SetName("Main Camera");
-	camera->GetTransform()->SetPosition(float3(0.0f, 1.0f, -5.0f));
+	camera->GetTransform()->SetPosition(float3(4.332f, 3.327f, -34.66f));
 	AddGameObject(camera);
 	App->renderer3D->SetMainCamera((Camera*)camera->GetComponent(ComponentType::CAMERA));
-	
-	GameObject* MusicTest;
-	MusicTest = new GameObject();
-	MusicTest->SetName("Background Music");
-	MusicTest->AddComponent(ComponentType::AUDIO_EMITTER);
-	AddGameObject(MusicTest);
-	AudioEmitter* music = (AudioEmitter*)MusicTest->GetComponent(ComponentType::AUDIO_EMITTER);
 
-	GameObject* TunnelEffect = new GameObject();
-	TunnelEffect->AddComponent(ComponentType::AUDIO_REVERB_ZONE);
-	TunnelEffect->SetName("Tunnel Effect");
-	AddGameObject(TunnelEffect);
-
-	GameObject* car = new GameObject();
-	car = AddGameObject(App->resources->RequestGameObject("Assets/Models/car/FuzzyRed.fbx"));
-	car->AddComponent(ComponentType::AUDIO_EMITTER);
-	AudioEmitter* carMusic = (AudioEmitter*)car->GetComponent(ComponentType::AUDIO_EMITTER);
-	carMusic->bypass_reverb_zones = false;
-	carMusic->distanceId = AK::GAME_PARAMETERS::RTPC_DISTANCE;
-	carMusic->reverbId = AK::GAME_PARAMETERS::RTPC_REVERB;
-	car->SetName("Car");
+	CreateInitialScene();
 
 	return ret;
 }
@@ -368,6 +350,11 @@ void ModuleScene::StartSceneAudioEvents()
 		carMusic->SetID(AK::EVENTS::PLAYMOVINGOBJ);
 		App->audio->PlayEvent(AK::EVENTS::PLAYMOVINGOBJ, carMusic->emitter);
 	}
+	if (root->GetChildByName("Rayan") != nullptr) {
+		AudioEmitter* rayanMusic = (AudioEmitter*)root->GetChildByName("Rayan")->GetComponent(ComponentType::AUDIO_EMITTER);
+		rayanMusic->SetID(AK::EVENTS::PLAYSTATICOBJ);
+		App->audio->PlayEvent(AK::EVENTS::PLAYSTATICOBJ, rayanMusic->emitter);
+	}
 	
 }
 
@@ -381,4 +368,45 @@ void ModuleScene::StopSceneAudioEvents()
 		AudioEmitter* carMusic = (AudioEmitter*)root->GetChildByName("Car")->GetComponent(ComponentType::AUDIO_EMITTER);
 		App->audio->StopEvent(AK::EVENTS::PLAYMOVINGOBJ, carMusic->emitter);
 	}
+}
+
+void ModuleScene::CreateInitialScene()
+{
+	GameObject* BackgroundMusic;
+	BackgroundMusic = new GameObject();
+	BackgroundMusic->SetName("Background Music");
+	BackgroundMusic->AddComponent(ComponentType::AUDIO_EMITTER);
+	AddGameObject(BackgroundMusic);
+	AudioEmitter* music = (AudioEmitter*)BackgroundMusic->GetComponent(ComponentType::AUDIO_EMITTER);
+
+	GameObject* TunnelEffect = new GameObject();
+	TunnelEffect = AddGameObject(App->resources->RequestGameObject("Assets/Models/road/tunel.fbx"));
+	TunnelEffect->AddComponent(ComponentType::AUDIO_REVERB_ZONE);
+	AudioReverbZone* reverbZ = (AudioReverbZone*)TunnelEffect->GetComponent(ComponentType::AUDIO_REVERB_ZONE);
+	reverbZ->r = 6.7f;
+	TunnelEffect->SetName("Tunnel Effect");
+	TunnelEffect->GetTransform()->SetScale(float3(0.110f, 0.110f, 0.110f));
+	TunnelEffect->GetTransform()->SetPosition(float3(22.025f, 0.0f, 10.187f));
+	TunnelEffect->GetTransform()->SetRotation(90.0f, -90.0f, 0.0f);
+	TunnelEffect->GetChildByName("Tube001")->GetTransform()->SetPosition(float3(-5.663f, -59.86f, 0.267f));
+	//Material* tunnelMat = (Material*)TunnelEffect->AddComponent(ComponentType::MATERIAL);
+	//tunnelMat->SetTexture((ResourceTexture*)App->resources->RequestResource(App->resources->ImportFile("Assets/Textures/tunel.png")));
+
+	GameObject* car = new GameObject();
+	car = AddGameObject(App->resources->RequestGameObject("Assets/Models/car/FuzzyRed.fbx"));
+	car->AddComponent(ComponentType::AUDIO_EMITTER);
+	AudioEmitter* carMusic = (AudioEmitter*)car->GetComponent(ComponentType::AUDIO_EMITTER);
+	carMusic->bypass_reverb_zones = false;
+	carMusic->distanceId = AK::GAME_PARAMETERS::RTPC_DISTANCE;
+	carMusic->reverbId = AK::GAME_PARAMETERS::RTPC_REVERB;
+	car->SetName("Car");
+
+	GameObject* Rayan = new GameObject();
+	Rayan = AddGameObject(App->resources->RequestGameObject("Assets/Models/Rayman/rayman.fbx"));
+	Rayan->AddComponent(ComponentType::AUDIO_EMITTER);
+	AudioEmitter* rayanMusic = (AudioEmitter*)Rayan->GetComponent(ComponentType::AUDIO_EMITTER);
+	rayanMusic->bypass_reverb_zones = false;
+	rayanMusic->reverbId = AK::GAME_PARAMETERS::RTPC_REVERB2;
+	Rayan->SetName("Rayan");
+	Rayan->GetTransform()->SetPosition(float3(-15.82f, 0.0f, 19.731f));
 }

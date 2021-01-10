@@ -22,6 +22,7 @@ AudioEmitter::AudioEmitter(GameObject* gameObject) : Component(gameObject)
 	id = 0;
 	distanceId = 0;
 	reverbId = 0;
+	reverbValue = 0;
 
 	emitter = App->audio->CreateSource(gameObject);
 	/*float3 Position = _gameObject->GetTransform()->GetPosition();

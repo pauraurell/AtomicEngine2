@@ -22,6 +22,7 @@ public:
 	AkGameObjectID id;
 	AkRtpcID distanceId;
 	AkRtpcID reverbId;
+	AkRtpcValue reverbValue;
 	bool mute = false;
 	bool bypass_reverb_zones;
 	bool play_on_awake;
