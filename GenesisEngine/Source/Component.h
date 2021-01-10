@@ -13,7 +13,10 @@ enum ComponentType {
 	MESH,
 	MATERIAL, 
 	CAMERA, 
-	LIGHT
+	LIGHT,
+	AUDIO_EMITTER,
+	AUDIO_LISTENER,
+	AUDIO_REVERB_ZONE
 };
 
 class Component {
@@ -39,10 +42,10 @@ public:
 
 public:
 	std::string name;
+	GameObject* _gameObject;
 
 protected:
 	ComponentType type;
-	GameObject* _gameObject;
 	bool enabled;
 
 	uint _resourceUID;

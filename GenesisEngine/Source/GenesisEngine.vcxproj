@@ -57,7 +57,7 @@
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>C:\Users\Pau\Documents\GitHub\GenesisEngine\GenesisEngine\Source\Libs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Pau\Documents\GitHub\GenesisEngine\GenesisEngine\Source\Libs;C:\Users\Pol\Documents\GitHub\AtomicEngine2\GenesisEngine\Source\Libs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
       <StructMemberAlignment>Default</StructMemberAlignment>
@@ -66,7 +66,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <AdditionalLibraryDirectories>C:\Users\ADMIN\Documents\GitHub\GenesisEngine\GenesisEngine\Source\Libs;C:\Users\marcpf5\Documents\GitHub\GenesisEngine\GenesisEngine\Source\Libs;G:\Github\GenesisEngine\GenesisEngine\Source\Libs;C:\Users\Pau\Documents\GitHub\GenesisEngine\GenesisEngine\Source\Libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Pau\Documents\GitHub\GenesisEngine\GenesisEngine\Source\Libs;C:\Users\Pol\Documents\GitHub\AtomicEngine2\GenesisEngine\Source\Libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -77,8 +77,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>false</ExceptionHandling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>G:\Github\GenesisEngine\GenesisEngine\Source\Libs;G:\Github\GenesisEngine\GenesisEngine\Source\Libs;</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>G:\Github\GenesisEngine\GenesisEngine\Source\Libs;C:\Users\Pol\Documents\GitHub\AtomicEngine2\GenesisEngine\Source\Libs</AdditionalIncludeDirectories>
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
       <StructMemberAlignment>Default</StructMemberAlignment>
@@ -89,16 +89,21 @@
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <AdditionalLibraryDirectories>G:\Github\GenesisEngine\GenesisEngine\Source\Libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>G:\Github\GenesisEngine\GenesisEngine\Source\Libs;C:\Users\Pol\Documents\GitHub\AtomicEngine2\GenesisEngine\Source\Libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AudioEmitter.h" />
+    <ClInclude Include="AudioListener.h" />
+    <ClInclude Include="AudioReverbZone.h" />
+    <ClInclude Include="AudioObject.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="EditorWindow.h" />
     <ClInclude Include="FileSystem.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GnJSON.h" />
+    <ClInclude Include="SoundBank.h" />
     <ClInclude Include="Importers.h" />
     <ClInclude Include="ImportingOptions.h" />
     <ClInclude Include="Libs\AK\AkPlatforms.h" />
@@ -263,6 +268,7 @@
     <ClInclude Include="Libs\AK\Wwise\TargetVer.h" />
     <ClInclude Include="Libs\AK\Wwise\Undo.h" />
     <ClInclude Include="Libs\AK\Wwise\Utilities.h" />
+    <ClInclude Include="Libs\AK\Wwise_IDs.h" />
     <ClInclude Include="Libs\ImGuizmo\ImGuizmo.h" />
     <ClInclude Include="Libs\MathGeoLib\include\Algorithm\Random\LCG.h" />
     <ClInclude Include="Libs\MathGeoLib\include\Geometry\AABB.h" />
@@ -349,6 +355,7 @@
     <ClInclude Include="Light.h" />
     <ClInclude Include="MeshImporter.h" />
     <ClInclude Include="ModelImporter.h" />
+    <ClInclude Include="ModuleAudio.h" />
     <ClInclude Include="ModuleCamera3D.h" />
     <ClInclude Include="ModuleRenderer3D.h" />
     <ClInclude Include="Module.h" />
@@ -376,6 +383,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="AudioEmitter.cpp" />
+    <ClCompile Include="AudioListener.cpp" />
+    <ClCompile Include="AudioReverbZone.cpp" />
+    <ClCompile Include="AudioObject.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -438,6 +449,7 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshImporter.cpp" />
     <ClCompile Include="ModelImporter.cpp" />
+    <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleCamera3D.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModuleRenderer3D.cpp" />

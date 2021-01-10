@@ -36,9 +36,15 @@ namespace AK
 {
 	void* AllocHook(size_t in_size);
 	void FreeHook(void* in_ptr);
-
 	void* VirtualAllocHook(void* in_pMemAddress, size_t in_size, DWORD in_dwAllocationType, DWORD in_dwProtect);
 	void VirtualFreeHook(void* in_pMemAddress, size_t in_size, DWORD in_dwFreeType);
+}
+
+namespace ModuleWwise
+{
+	bool InitSoundEngine();
+	void ProcessAudio();
+	bool TermSoundEngine();
 }
 
 #endif;

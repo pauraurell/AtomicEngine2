@@ -1,0 +1,127 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "11",
+  "SoundbankVersion": "128",
+  "RootPaths": {
+   "ProjectRoot": "D:\\Audiokinetic\\Projects\\AudioEngine\\",
+   "SourceFilesRoot": "D:\\Audiokinetic\\Projects\\AudioEngine\\.cache\\Windows\\",
+   "SoundBanksRoot": "D:\\Audiokinetic\\Projects\\AudioEngine\\GeneratedSoundBanks\\Windows\\",
+   "ExternalSourcesInputFile": "",
+   "ExternalSourcesOutputRoot": "D:\\Audiokinetic\\Projects\\AudioEngine\\GeneratedSoundBanks\\Windows"
+  },
+  "DialogueEvents": [],
+  "StreamedFiles": [],
+  "MediaFilesNotInAnyBank": [],
+  "SoundBanks": [
+   {
+    "Id": "1355168291",
+    "Language": "SFX",
+    "ObjectPath": "Init",
+    "ShortName": "Init",
+    "Path": "Init.bnk"
+   },
+   {
+    "Id": "2243015577",
+    "Language": "SFX",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\AtomicSoundbank",
+    "ShortName": "AtomicSoundbank",
+    "Path": "AtomicSoundbank.bnk",
+    "IncludedEvents": [
+     {
+      "Id": "655376382",
+      "Name": "Song1_to_2",
+      "ObjectPath": "\\Events\\Default Work Unit\\Song1_to_2"
+     },
+     {
+      "Id": "2114273916",
+      "Name": "Song2_to_1",
+      "ObjectPath": "\\Events\\Default Work Unit\\Song2_to_1"
+     },
+     {
+      "Id": "1714347020",
+      "Name": "Start_Loop",
+      "ObjectPath": "\\Events\\Default Work Unit\\Start_Loop"
+     }
+    ],
+    "IncludedMemoryFiles": [
+     {
+      "Id": "144037770",
+      "Language": "SFX",
+      "ShortName": "Motors de Videojocs\\Camilo, El Alfa - BEBÉ (FULLDISCO.ORG).wav",
+      "Path": "SFX\\Motors de Videojocs\\Camilo, El Alfa - BEBÉ (FULLDISCO.ORG)_1C9C67B2.wem"
+     },
+     {
+      "Id": "364733489",
+      "Language": "SFX",
+      "ShortName": "Motors de Videojocs\\1 - Kaydy Cain, Uzielito Mix, El Habano - Perreologia.wav",
+      "Path": "SFX\\Motors de Videojocs\\1 - Kaydy Cain, Uzielito Mix, El Habano - Perreologia_1C9C67B2.wem"
+     }
+    ]
+   },
+   {
+    "Id": "2360670616",
+    "Language": "SFX",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\Atomic2",
+    "ShortName": "Atomic2",
+    "Path": "Atomic2.bnk",
+    "IncludedEvents": [
+     {
+      "Id": "3277656012",
+      "Name": "PlayMovingObj",
+      "ObjectPath": "\\Events\\Default Work Unit\\PlayMovingObj"
+     },
+     {
+      "Id": "4290004840",
+      "Name": "PlayStaticObj",
+      "ObjectPath": "\\Events\\Default Work Unit\\PlayStaticObj"
+     }
+    ],
+    "IncludedMemoryFiles": [
+     {
+      "Id": "663330264",
+      "Language": "SFX",
+      "ShortName": "Motors de Videojocs\\Kaydy Cain - Si No Me Das Tu Corazón Te Lo Robo (FULLDISCO.ORG).wav",
+      "Path": "SFX\\Motors de Videojocs\\Kaydy Cain - Si No Me Das Tu Corazón Te Lo Robo (FULLDISCO.ORG)_1C9C67B2.wem"
+     },
+     {
+      "Id": "664161281",
+      "Language": "SFX",
+      "ShortName": "Car-Driving-Slow.wav",
+      "Path": "SFX\\Car-Driving-Slow_F17FB28C.wem"
+     }
+    ]
+   },
+   {
+    "Id": "2360670617",
+    "Language": "SFX",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\Atomic3",
+    "ShortName": "Atomic3",
+    "Path": "Atomic3.bnk",
+    "IncludedEvents": [
+     {
+      "Id": "4091047182",
+      "Name": "PauseAll",
+      "ObjectPath": "\\Events\\Default Work Unit\\PauseAll"
+     },
+     {
+      "Id": "3240900869",
+      "Name": "ResumeAll",
+      "ObjectPath": "\\Events\\Default Work Unit\\ResumeAll"
+     },
+     {
+      "Id": "239574670",
+      "Name": "SetReverbOff",
+      "ObjectPath": "\\Events\\Default Work Unit\\SetReverbOff"
+     },
+     {
+      "Id": "2297615984",
+      "Name": "SetReverbOn",
+      "ObjectPath": "\\Events\\Default Work Unit\\SetReverbOn"
+     }
+    ]
+   }
+  ]
+ }
+}

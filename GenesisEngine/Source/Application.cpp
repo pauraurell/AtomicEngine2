@@ -13,6 +13,7 @@ Application::Application(int argc, char* args[]) : argc(argc), args(args), want_
 	input = new ModuleInput(true);
 	renderer3D = new ModuleRenderer3D(true);
 	camera = new ModuleCamera3D(true);
+	audio = new ModuleAudio(true);
 	scene = new ModuleScene(true);
 	editor = new Editor(true);
 	resources = new ModuleResources(true);
@@ -22,6 +23,7 @@ Application::Application(int argc, char* args[]) : argc(argc), args(args), want_
 	AddModule(resources);
 	AddModule(camera);
 	AddModule(input);
+	AddModule(audio);
 	AddModule(scene);
 	AddModule(editor);
 
@@ -75,7 +77,6 @@ bool Application::Init()
 	{
 		ret = modules_vector[i]->Start();
 	}
-	
 
 	config.Release();
 	RELEASE_ARRAY(buffer);
@@ -169,6 +170,7 @@ void Application::StartGame()
 	in_game = true;
 	Time::gameClock.Start();
 	Save("Library/Scenes/tmp.scene");
+	//scene->StartSceneAudioEvents();
 }
 
 void Application::StopGame()
@@ -176,6 +178,9 @@ void Application::StopGame()
 	in_game = false;
 	Time::gameClock.Stop();
 	Load("Library/Scenes/tmp.scene");
+	//scene->StopSceneAudioEvents();
+	AK::SoundEngine::StopAll();
+	App->scene->sceneInGame = false;
 }
 
 void Application::AddModule(Module* mod)

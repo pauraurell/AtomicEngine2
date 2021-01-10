@@ -12,6 +12,7 @@
 #include "ModuleScene.h"
 #include "Editor.h"
 #include "ModuleResources.h"
+#include "ModuleAudio.h"
 
 #include <string>
 #include <stack>
@@ -52,10 +53,12 @@ public:
 	Editor* editor;
 	ModuleRenderer3D* renderer3D;
 	ModuleResources* resources;
+	ModuleAudio* audio;
 
 	const char* engine_name;
 	const char* engine_version;
 	bool in_game;
+	bool paused;
 
 public:
 

@@ -4,6 +4,9 @@
 #include "Mesh.h"
 #include "Material.h"
 #include "Camera.h"
+#include "AudioEmitter.h"
+#include "AudioListener.h"
+#include "AudioReverbZone.h"
 #include "ImGui/imgui.h"
 #include "GnJSON.h"
 #include "Application.h"
@@ -30,7 +33,11 @@ GameObject::GameObject(ComponentType component) : GameObject()
 	case ComponentType::LIGHT:
 		name = "Light";
 		break;
-	default:
+	case ComponentType::AUDIO_EMITTER:
+		name = "Audio Emitter";
+		break;
+	case ComponentType::AUDIO_LISTENER:
+		name = "Audio Listener";
 		break;
 	}
 }
@@ -230,6 +237,15 @@ Component* GameObject::AddComponent(ComponentType type)
 	case LIGHT:
 		component = new Light(this);
 		break;
+	case AUDIO_EMITTER:
+		component = new AudioEmitter(this);
+		break;
+	case AUDIO_LISTENER:
+		component = new AudioListener(this);
+		break;
+	case AUDIO_REVERB_ZONE:
+		component = new AudioReverbZone(this);
+		break;
 	default:
 		break;
 	}
@@ -308,6 +324,20 @@ int GameObject::GetChildrenAmount()
 GameObject* GameObject::GetChildAt(int index)
 {
 	return children[index];
+}
+
+GameObject* GameObject::GetChildByName(const char* name )
+{
+	for (int i = 0; i < children.size(); i++)
+	{
+		if (children[i]->name == name) 
+		{
+			return children[i];
+			break;
+		}
+	}
+
+	return nullptr;
 }
 
 GameObject* GameObject::GetParent()

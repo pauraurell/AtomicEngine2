@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="11" SoundbankVersion="128">
+	<RootPaths>
+		<ProjectRoot>D:\Audiokinetic\Projects\AudioEngine\</ProjectRoot>
+		<SourceFilesRoot>D:\Audiokinetic\Projects\AudioEngine\.cache\Windows\</SourceFilesRoot>
+		<SoundBanksRoot>D:\Audiokinetic\Projects\AudioEngine\GeneratedSoundBanks\Windows\</SoundBanksRoot>
+		<ExternalSourcesInputFile></ExternalSourcesInputFile>
+		<ExternalSourcesOutputRoot>D:\Audiokinetic\Projects\AudioEngine\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
+	</RootPaths>
+	<DialogueEvents/>
+	<StreamedFiles/>
+	<MediaFilesNotInAnyBank/>
+	<SoundBanks>
+		<SoundBank Id="1355168291" Language="SFX">
+			<ObjectPath>Init</ObjectPath>
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+		</SoundBank>
+		<SoundBank Id="2243015577" Language="SFX">
+			<ObjectPath>\SoundBanks\Default Work Unit\AtomicSoundbank</ObjectPath>
+			<ShortName>AtomicSoundbank</ShortName>
+			<Path>AtomicSoundbank.bnk</Path>
+			<IncludedEvents>
+				<Event Id="655376382" Name="Song1_to_2" ObjectPath="\Events\Default Work Unit\Song1_to_2"/>
+				<Event Id="2114273916" Name="Song2_to_1" ObjectPath="\Events\Default Work Unit\Song2_to_1"/>
+				<Event Id="1714347020" Name="Start_Loop" ObjectPath="\Events\Default Work Unit\Start_Loop"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="144037770" Language="SFX">
+					<ShortName>Motors de Videojocs\Camilo, El Alfa - BEBÉ (FULLDISCO.ORG).wav</ShortName>
+					<Path>SFX\Motors de Videojocs\Camilo, El Alfa - BEBÉ (FULLDISCO.ORG)_1C9C67B2.wem</Path>
+				</File>
+				<File Id="364733489" Language="SFX">
+					<ShortName>Motors de Videojocs\1 - Kaydy Cain, Uzielito Mix, El Habano - Perreologia.wav</ShortName>
+					<Path>SFX\Motors de Videojocs\1 - Kaydy Cain, Uzielito Mix, El Habano - Perreologia_1C9C67B2.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
+		<SoundBank Id="2360670616" Language="SFX">
+			<ObjectPath>\SoundBanks\Default Work Unit\Atomic2</ObjectPath>
+			<ShortName>Atomic2</ShortName>
+			<Path>Atomic2.bnk</Path>
+			<IncludedEvents>
+				<Event Id="3277656012" Name="PlayMovingObj" ObjectPath="\Events\Default Work Unit\PlayMovingObj"/>
+				<Event Id="4290004840" Name="PlayStaticObj" ObjectPath="\Events\Default Work Unit\PlayStaticObj"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="663330264" Language="SFX">
+					<ShortName>Motors de Videojocs\Kaydy Cain - Si No Me Das Tu Corazón Te Lo Robo (FULLDISCO.ORG).wav</ShortName>
+					<Path>SFX\Motors de Videojocs\Kaydy Cain - Si No Me Das Tu Corazón Te Lo Robo (FULLDISCO.ORG)_1C9C67B2.wem</Path>
+				</File>
+				<File Id="664161281" Language="SFX">
+					<ShortName>Car-Driving-Slow.wav</ShortName>
+					<Path>SFX\Car-Driving-Slow_F17FB28C.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
+		<SoundBank Id="2360670617" Language="SFX">
+			<ObjectPath>\SoundBanks\Default Work Unit\Atomic3</ObjectPath>
+			<ShortName>Atomic3</ShortName>
+			<Path>Atomic3.bnk</Path>
+			<IncludedEvents>
+				<Event Id="4091047182" Name="PauseAll" ObjectPath="\Events\Default Work Unit\PauseAll"/>
+				<Event Id="3240900869" Name="ResumeAll" ObjectPath="\Events\Default Work Unit\ResumeAll"/>
+				<Event Id="239574670" Name="SetReverbOff" ObjectPath="\Events\Default Work Unit\SetReverbOff"/>
+				<Event Id="2297615984" Name="SetReverbOn" ObjectPath="\Events\Default Work Unit\SetReverbOn"/>
+			</IncludedEvents>
+		</SoundBank>
+	</SoundBanks>
+</SoundBanksInfo>

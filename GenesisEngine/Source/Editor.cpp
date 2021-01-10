@@ -378,6 +378,14 @@ bool Editor::CreateMainMenuBar() {
 			{
 				App->scene->AddGameObject(new GameObject(ComponentType::CAMERA));
 			}
+			else if (ImGui::MenuItem("Audio Emitter"))
+			{
+				App->scene->AddGameObject(new GameObject(ComponentType::AUDIO_EMITTER));
+			}
+			else if (ImGui::MenuItem("Audio Listener"))
+			{
+				App->scene->AddGameObject(new GameObject(ComponentType::AUDIO_LISTENER));
+			}
 			ImGui::EndMenu();
 		}
 
@@ -448,23 +456,44 @@ void Editor::ShowGameButtons()
 		if (App->in_game == false)
 		{
 			if (ImGui::Button("Play", ImVec2(40, 20)))
+			{
 				App->StartGame();
+				App->paused = false;
+				App->scene->background_timer.Start();
+			}
 		}
+
 		else {
 			if (ImGui::Button("Stop", ImVec2(40, 20)))
+			{
 				App->StopGame();
+				App->paused = false;
+				App->scene->background_timer.Stop();
+			}
+			
 		}
 
 		ImGui::NextColumn();
 		if (Time::gameClock.paused) 
 		{
 			if (ImGui::Button("Resume", ImVec2(45, 20)))
+			{
 				Time::gameClock.Resume();
+				App->paused = false;
+				App->audio->ResumeEvents();
+				App->scene->background_timer.Resume();
+			}
 		}
 		else 
 		{
-			if (ImGui::Button("Pause", ImVec2(45, 20))) 
+			if (ImGui::Button("Pause", ImVec2(45, 20)))
+			{
 				Time::gameClock.Pause();
+				App->paused = true;
+				App->audio->PauseEvents();
+				App->scene->background_timer.Stop();
+			}
+				
 		}
 
 	}

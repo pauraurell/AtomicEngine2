@@ -3,14 +3,22 @@
 #include "ModuleScene.h"
 #include "GnJSON.h"
 #include "Mesh.h"
+#include "AudioEmitter.h"
+#include "AudioReverbZone.h"
 #include "FileSystem.h"
 #include "GameObject.h"
+#include "Component.h"
 #include "Transform.h"
+#include "Camera.h"
+#include "Time.h"
+#include "ModuleWwise.h"
+#include "AK/Wwise_IDs.h"
+#include "AK/SpatialAudio/Common/AkSpatialAudio.h"
 
 ModuleScene::ModuleScene(bool start_enabled) : Module(start_enabled), show_grid(true), selectedGameObject(nullptr), root(nullptr) 
 {
 	name = "scene";
-
+	sceneInGame = false;
 	mCurrentGizmoOperation = ImGuizmo::OPERATION::TRANSLATE;
 	mCurrentGizmoMode = ImGuizmo::MODE::WORLD;
 }
@@ -27,23 +35,18 @@ bool ModuleScene::Start()
 	selectedGameObject = root;
 	root->SetName("Root");
 
-	//GameObject* baker_house = App->resources->RequestGameObject("Assets/Models/baker_house/BakerHouse.fbx");
-	//AddGameObject(baker_house);
-	
-	GameObject* rayman = App->resources->RequestGameObject("Assets/Models/Rayman/rayman.fbx");
-	AddGameObject(rayman);
+	//GameObject* street_environment = App->resources->RequestGameObject("Assets/Models/street/Street environment_V01.fbx");
+	//AddGameObject(street_environment);
 
-	GameObject* street_environment = App->resources->RequestGameObject("Assets/Models/street/Street environment_V01.fbx");
-	AddGameObject(street_environment);
-	
-	GameObject* camera = new GameObject();
+	camera = new GameObject();
 	camera->AddComponent(ComponentType::CAMERA);
+	camera->AddComponent(ComponentType::AUDIO_LISTENER);
 	camera->SetName("Main Camera");
-	camera->GetTransform()->SetPosition(float3(0.0f, 1.0f, -5.0f));
+	camera->GetTransform()->SetPosition(float3(4.332f, 3.327f, -34.66f));
 	AddGameObject(camera);
 	App->renderer3D->SetMainCamera((Camera*)camera->GetComponent(ComponentType::CAMERA));
 
-	//uint baker_house_texture = App->resources->ImportFile("Assets/Textures/Baker_house.png");
+	CreateInitialScene();
 
 	return ret;
 }
@@ -64,7 +67,30 @@ update_status ModuleScene::Update(float dt)
 
 	HandleInput();
 
+	/*float dis = sqrt(App->camera->GetCamera()->GetPosition().DistanceSq(car->GetTransform()->_position));
+	if (dis > 100) { dis = 100; }
+	AudioEmitter* carMusic = (AudioEmitter*)car->GetComponent(ComponentType::AUDIO_EMITTER);
+	AkRtpcValue distanceValue = dis;
+	AKRESULT result = AK::SoundEngine::SetRTPCValue(carMusic->distanceId, distanceValue);*/
+
+	if (App->in_game && sceneInGame == false)
+	{
+		background_music = false;
+		StartSceneAudioEvents();
+		sceneInGame = true;
+	}
+
 	root->Update();
+
+	if (root->GetChildByName("Background Music") != nullptr) { BackgroundMusicLoop(); }
+
+	if (App->in_game && root->GetChildByName("Car") != nullptr) 
+	{ 
+		if (App->paused == false) 
+		{ 
+			MoveObject(root->GetChildByName("Car"), 0.1); 
+		}
+	}
 
 	return UPDATE_CONTINUE;
 }
@@ -98,7 +124,7 @@ bool ModuleScene::CleanUp()
 	return true;
 }
 
-void ModuleScene::AddGameObject(GameObject* gameObject)
+GameObject* ModuleScene::AddGameObject(GameObject* gameObject)
 {
 	if (gameObject != nullptr) 
 	{
@@ -106,6 +132,7 @@ void ModuleScene::AddGameObject(GameObject* gameObject)
 		root->AddChild(gameObject);
 
 		selectedGameObject = gameObject;
+		return gameObject;
 	}
 }
 
@@ -264,6 +291,133 @@ bool ModuleScene::LoadConfig(GnJSONObj& config)
 	return true;
 }
 
+void ModuleScene::MoveObject(GameObject* obj, float speed)
+{
+	Transform* transform = (Transform*)obj->GetComponent(ComponentType::TRANSFORM);
+		if (transform->_position.x < 20 && transform->_position.z <= 0)
+		{
+			transform->_position.x = transform->_position.x + speed;
+			obj->GetChildAt(0)->GetTransform()->SetRotation(-90, 0, 90);
+		}
 
+		else if (transform->_position.x > 20)
+		{
+			transform->_position.z = transform->_position.z + speed;
+			obj->GetChildAt(0)->GetTransform()->SetRotation(-90, 0, 0);
+		}
+		if (transform->_position.z > 20 && transform->_position.x > 0)
+		{
+			transform->_position.x = transform->_position.x - speed;
+			obj->GetChildAt(0)->GetTransform()->SetRotation(-90, 0, 270);
+		}
+		else if (transform->_position.x < 0)
+		{
+			transform->_position.z = transform->_position.z - speed;
+			obj->GetChildAt(0)->GetTransform()->SetRotation(-90, 0, 180);
+		}
+		transform->UpdateGlobalTransform();
+		obj->UpdateChildrenTransforms();
+}
 
+void ModuleScene::BackgroundMusicLoop()
+{
+	if (background_timer.ReadSec() >= 30)
+	{
+		if (background_music == false)
+		{
+			AudioEmitter* music = (AudioEmitter*)root->GetChildByName("Background Music")->GetComponent(ComponentType::AUDIO_EMITTER);
+			music->SetID(AK::EVENTS::SONG1_TO_2);
+			App->audio->PlayEvent(AK::EVENTS::SONG1_TO_2, music->emitter);
+			background_timer.Start();
+			background_music = true;
+		}
+		else if (background_music == true)
+		{
+			AudioEmitter* music = (AudioEmitter*)root->GetChildByName("Background Music")->GetComponent(ComponentType::AUDIO_EMITTER);
+			music->SetID(AK::EVENTS::SONG2_TO_1);
+			App->audio->PlayEvent(AK::EVENTS::SONG2_TO_1, music->emitter);
+			background_timer.Start();
+			background_music = false;
+		}
+	}
+}
 
+void ModuleScene::StartSceneAudioEvents()
+{
+	if (root->GetChildByName("Background Music") != nullptr) {
+		AudioEmitter* music = (AudioEmitter*)root->GetChildByName("Background Music")->GetComponent(ComponentType::AUDIO_EMITTER);
+		music->SetID(AK::EVENTS::START_LOOP);
+		App->audio->PlayEvent(AK::EVENTS::START_LOOP, music->emitter);
+	}
+	
+	if (root->GetChildByName("Car") != nullptr) {
+		AudioEmitter* carMusic = (AudioEmitter*)root->GetChildByName("Car")->GetComponent(ComponentType::AUDIO_EMITTER);
+		carMusic->SetID(AK::EVENTS::PLAYMOVINGOBJ);
+		App->audio->PlayEvent(AK::EVENTS::PLAYMOVINGOBJ, carMusic->emitter);
+	}
+	if (root->GetChildByName("Rayan") != nullptr) {
+		AudioEmitter* rayanMusic = (AudioEmitter*)root->GetChildByName("Rayan")->GetComponent(ComponentType::AUDIO_EMITTER);
+		rayanMusic->SetID(AK::EVENTS::PLAYSTATICOBJ);
+		App->audio->PlayEvent(AK::EVENTS::PLAYSTATICOBJ, rayanMusic->emitter);
+	}
+	
+}
+
+void ModuleScene::StopSceneAudioEvents()
+{
+	if (root->GetChildByName("Background Music") != nullptr) {
+		AudioEmitter* music = (AudioEmitter*)root->GetChildByName("Background Music")->GetComponent(ComponentType::AUDIO_EMITTER);
+		App->audio->StopEvent(AK::EVENTS::START_LOOP, music->emitter);
+	}
+	if (root->GetChildByName("Car") != nullptr) {
+		AudioEmitter* carMusic = (AudioEmitter*)root->GetChildByName("Car")->GetComponent(ComponentType::AUDIO_EMITTER);
+		App->audio->StopEvent(AK::EVENTS::PLAYMOVINGOBJ, carMusic->emitter);
+	}
+}
+
+void ModuleScene::CreateInitialScene()
+{
+	GameObject* BackgroundMusic;
+	BackgroundMusic = new GameObject();
+	BackgroundMusic->SetName("Background Music");
+	BackgroundMusic->AddComponent(ComponentType::AUDIO_EMITTER);
+	AddGameObject(BackgroundMusic);
+	AudioEmitter* music = (AudioEmitter*)BackgroundMusic->GetComponent(ComponentType::AUDIO_EMITTER);
+	float volumeBG = 0.1f;
+	music->volume = &volumeBG;
+
+	GameObject* TunnelEffect = new GameObject();
+	TunnelEffect = AddGameObject(App->resources->RequestGameObject("Assets/Models/road/tunel.fbx"));
+	TunnelEffect->AddComponent(ComponentType::AUDIO_REVERB_ZONE);
+	AudioReverbZone* reverbZ = (AudioReverbZone*)TunnelEffect->GetComponent(ComponentType::AUDIO_REVERB_ZONE);
+	reverbZ->r = 6.7f;
+	TunnelEffect->SetName("Tunnel Effect");
+	TunnelEffect->GetTransform()->SetScale(float3(0.110f, 0.110f, 0.110f));
+	TunnelEffect->GetTransform()->SetPosition(float3(22.025f, 0.0f, 10.187f));
+	TunnelEffect->GetTransform()->SetRotation(90.0f, -90.0f, 0.0f);
+	TunnelEffect->GetChildByName("Tube001")->GetTransform()->SetPosition(float3(-5.663f, -59.86f, 0.267f));
+	//Material* tunnelMat = (Material*)TunnelEffect->AddComponent(ComponentType::MATERIAL);
+	//tunnelMat->SetTexture((ResourceTexture*)App->resources->RequestResource(App->resources->ImportFile("Assets/Textures/tunel.png")));
+	TunnelEffect->GetTransform()->SetGlobalTransform(TunnelEffect->GetTransform()->GetGlobalTransform());
+
+	GameObject* car = new GameObject();
+	car = AddGameObject(App->resources->RequestGameObject("Assets/Models/car/FuzzyRed.fbx"));
+	car->AddComponent(ComponentType::AUDIO_EMITTER);
+	AudioEmitter* carMusic = (AudioEmitter*)car->GetComponent(ComponentType::AUDIO_EMITTER);
+	carMusic->bypass_reverb_zones = false;
+	carMusic->distanceId = AK::GAME_PARAMETERS::RTPC_DISTANCE;
+	carMusic->reverbId = AK::GAME_PARAMETERS::RTPC_REVERB;
+	car->SetName("Car");
+
+	GameObject* Rayan = new GameObject();
+	Rayan = AddGameObject(App->resources->RequestGameObject("Assets/Models/Rayman/rayman.fbx"));
+	Rayan->AddComponent(ComponentType::AUDIO_EMITTER);
+	AudioEmitter* rayanMusic = (AudioEmitter*)Rayan->GetComponent(ComponentType::AUDIO_EMITTER);
+	rayanMusic->bypass_reverb_zones = false;
+	rayanMusic->reverbId = AK::GAME_PARAMETERS::RTPC_REVERB2;
+	float volumeRayan = 0.26f;
+	*(rayanMusic->volume) = volumeRayan;
+	Rayan->SetName("Rayan");
+	Rayan->GetTransform()->SetPosition(float3(-15.82f, 0.0f, 19.731f));
+	Rayan->GetTransform()->SetGlobalTransform(Rayan->GetTransform()->GetGlobalTransform());
+}
