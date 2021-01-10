@@ -28,7 +28,7 @@ The last one is the Reverb Zone and it is a sphere that if contains a Audio Emit
 the distance to the center of the sphere.
 In the demo scene there are two game objects with spatial audio, a background music and a reverb zone. 
 
-![gif1](https://github.com/pauraurell/AtomicEngine2/blob/gh-pages/Web%20pics/gif1.gif)
+![](Web%20pics/gif1.gif)
 ![gif2](https://github.com/pauraurell/AtomicEngine2/blob/gh-pages/Web%20pics/gif2.gif)
 
 ## Demo Video
