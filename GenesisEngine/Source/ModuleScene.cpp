@@ -75,7 +75,6 @@ update_status ModuleScene::Update(float dt)
 
 	if (App->in_game && sceneInGame == false)
 	{
-		background_timer.Start();
 		background_music = false;
 		StartSceneAudioEvents();
 		sceneInGame = true;
@@ -384,6 +383,8 @@ void ModuleScene::CreateInitialScene()
 	BackgroundMusic->AddComponent(ComponentType::AUDIO_EMITTER);
 	AddGameObject(BackgroundMusic);
 	AudioEmitter* music = (AudioEmitter*)BackgroundMusic->GetComponent(ComponentType::AUDIO_EMITTER);
+	float volumeBG = 0.1f;
+	music->volume = &volumeBG;
 
 	GameObject* TunnelEffect = new GameObject();
 	TunnelEffect = AddGameObject(App->resources->RequestGameObject("Assets/Models/road/tunel.fbx"));
@@ -414,6 +415,8 @@ void ModuleScene::CreateInitialScene()
 	AudioEmitter* rayanMusic = (AudioEmitter*)Rayan->GetComponent(ComponentType::AUDIO_EMITTER);
 	rayanMusic->bypass_reverb_zones = false;
 	rayanMusic->reverbId = AK::GAME_PARAMETERS::RTPC_REVERB2;
+	float volumeRayan = 0.26f;
+	*(rayanMusic->volume) = volumeRayan;
 	Rayan->SetName("Rayan");
 	Rayan->GetTransform()->SetPosition(float3(-15.82f, 0.0f, 19.731f));
 	Rayan->GetTransform()->SetGlobalTransform(Rayan->GetTransform()->GetGlobalTransform());

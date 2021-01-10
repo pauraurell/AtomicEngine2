@@ -459,6 +459,7 @@ void Editor::ShowGameButtons()
 			{
 				App->StartGame();
 				App->paused = false;
+				App->scene->background_timer.Start();
 			}
 		}
 
@@ -467,6 +468,7 @@ void Editor::ShowGameButtons()
 			{
 				App->StopGame();
 				App->paused = false;
+				App->scene->background_timer.Stop();
 			}
 			
 		}
@@ -479,6 +481,7 @@ void Editor::ShowGameButtons()
 				Time::gameClock.Resume();
 				App->paused = false;
 				App->audio->ResumeEvents();
+				App->scene->background_timer.Resume();
 			}
 		}
 		else 
@@ -488,6 +491,7 @@ void Editor::ShowGameButtons()
 				Time::gameClock.Pause();
 				App->paused = true;
 				App->audio->PauseEvents();
+				App->scene->background_timer.Stop();
 			}
 				
 		}
