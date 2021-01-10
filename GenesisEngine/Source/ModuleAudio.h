@@ -9,6 +9,7 @@
 
 using namespace std;
 class GameObject;
+class AudioEmitter;
 
 class ModuleAudio : public Module
 {
@@ -33,5 +34,5 @@ public:
 	AudioObject* CreateListener(GameObject* go);
 
 	AkGameObjectID ListenerObjectId;
-	vector<AudioObject*> audio_objects;
+	vector<AudioEmitter*> audio_emitters;
 };

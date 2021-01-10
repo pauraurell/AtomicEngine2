@@ -36,10 +36,7 @@ update_status ModuleAudio::PostUpdate(float dt)
 
 bool ModuleAudio::CleanUp()
 {
-	for (int i = 0; i < audio_objects.size(); i++)
-	{
-		//audio_objects[i]->DeleteObject();
-	}
+	
 	ModuleWwise::TermSoundEngine();
 	return true;
 }
@@ -61,7 +58,6 @@ AudioObject* ModuleAudio::CreateSource(GameObject* go)
 {
 	AudioObject* new_sourceObj = new AudioObject(go->UUID, go->GetName());
 	new_sourceObj->SetPos(go->GetTransform()->GetPosition(), { 1,0,0 }, { 0,1,0 });
-
 	return new_sourceObj;
 }
 

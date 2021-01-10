@@ -4,6 +4,7 @@
 #include "GameObject.h"
 #include "GnJSON.h"
 #include "Transform.h"
+#include "ModuleAudio.h"
 
 #include "glew/include/glew.h"
 #include "ImGui/imgui.h"
@@ -22,11 +23,19 @@ AudioEmitter::AudioEmitter(GameObject* gameObject) : Component(gameObject)
 	emitter = App->audio->CreateSource(gameObject);
 	/*float3 Position = _gameObject->GetTransform()->GetPosition();
 	emitter = App->audio->CreateSoundObj(gameObject->UUID, gameObject->name.c_str(), Position.x, Position.y, Position.z);*/
+	App->audio->audio_emitters.push_back(this);
 	LOG("Audio Emitter Component created for %s", _gameObject->GetName())
 }
 
 AudioEmitter::~AudioEmitter()
 {
+	for (int i = 0; i < App->audio->audio_emitters.size(); i++)
+	{
+		if (App->audio->audio_emitters[i]->name == this->name)
+		{
+			App->audio->audio_emitters.erase(App->audio->audio_emitters.begin() + i);
+		}
+	}
 	emitter->DeleteObject();
 }
 
