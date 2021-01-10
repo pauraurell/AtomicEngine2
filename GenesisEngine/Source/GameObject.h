@@ -48,6 +48,7 @@ public:
 	void AddChild(GameObject* child);
 	int GetChildrenAmount();
 	GameObject* GetChildAt(int index);
+	GameObject* GetChildByName(const char* name);
 	bool RemoveChild(GameObject* gameObject);
 	void DeleteChildren();
 	void UpdateChildrenTransforms();

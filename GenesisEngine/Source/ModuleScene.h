@@ -47,10 +47,9 @@ public:
 	bool show_grid;
 	GameObject* camera;
 	GameObject* selectedGameObject;
-	GameObject* car = nullptr;
-	GameObject* MusicTest;
 	Timer background_timer;
 	bool background_music;
+	bool sceneInGame;
 
 private:
 	GameObject* root;

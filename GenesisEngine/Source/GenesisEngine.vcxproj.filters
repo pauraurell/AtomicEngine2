@@ -1118,6 +1118,9 @@
     <ClInclude Include="AudioObject.h">
       <Filter>Tools\Wwise</Filter>
     </ClInclude>
+    <ClInclude Include="SoundBank.h">
+      <Filter>Tools\Wwise</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="Libs\AK\ws2_32.LIB">

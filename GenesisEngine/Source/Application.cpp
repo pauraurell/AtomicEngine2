@@ -180,6 +180,8 @@ void Application::StopGame()
 	Time::gameClock.Stop();
 	Load("Library/Scenes/tmp.scene");
 	//scene->StopSceneAudioEvents();
+	AK::SoundEngine::StopAll();
+	App->scene->sceneInGame = false;
 }
 
 void Application::AddModule(Module* mod)

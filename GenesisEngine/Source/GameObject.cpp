@@ -326,6 +326,17 @@ GameObject* GameObject::GetChildAt(int index)
 	return children[index];
 }
 
+GameObject* GameObject::GetChildByName(const char* name )
+{
+	for (int i = 0; i < children.size(); i++)
+	{
+		if (children[i]->name == name) 
+		{
+			return children[i];
+		}
+	}
+}
+
 GameObject* GameObject::GetParent()
 {
 	return _parent;

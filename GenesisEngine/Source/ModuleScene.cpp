@@ -9,6 +9,7 @@
 #include "Component.h"
 #include "Transform.h"
 #include "Camera.h"
+#include "Time.h"
 #include "ModuleWwise.h"
 #include "AK/Wwise_IDs.h"
 #include "AK/SpatialAudio/Common/AkSpatialAudio.h"
@@ -16,7 +17,7 @@
 ModuleScene::ModuleScene(bool start_enabled) : Module(start_enabled), show_grid(true), selectedGameObject(nullptr), root(nullptr) 
 {
 	name = "scene";
-
+	sceneInGame = false;
 	mCurrentGizmoOperation = ImGuizmo::OPERATION::TRANSLATE;
 	mCurrentGizmoMode = ImGuizmo::MODE::WORLD;
 }
@@ -35,10 +36,12 @@ bool ModuleScene::Start()
 
 	//GameObject* street_environment = App->resources->RequestGameObject("Assets/Models/street/Street environment_V01.fbx");
 	//AddGameObject(street_environment);
+	GameObject* car = new GameObject();
 	car = AddGameObject(App->resources->RequestGameObject("Assets/Models/car/FuzzyRed.fbx"));
 	car->AddComponent(ComponentType::AUDIO_EMITTER);
 	AudioEmitter* carMusic = (AudioEmitter*)car->GetComponent(ComponentType::AUDIO_EMITTER);
 	carMusic->distanceId = AK::GAME_PARAMETERS::RTPC_DISTANCE;
+	car->SetName("Car");
 	
 	camera = new GameObject();
 	camera->AddComponent(ComponentType::CAMERA);
@@ -48,8 +51,9 @@ bool ModuleScene::Start()
 	AddGameObject(camera);
 	App->renderer3D->SetMainCamera((Camera*)camera->GetComponent(ComponentType::CAMERA));
 	
+	GameObject* MusicTest;
 	MusicTest = new GameObject();
-	MusicTest->SetName("Perreo Test");
+	MusicTest->SetName("Background Music");
 	MusicTest->AddComponent(ComponentType::AUDIO_EMITTER);
 	AddGameObject(MusicTest);
 	AudioEmitter* music = (AudioEmitter*)MusicTest->GetComponent(ComponentType::AUDIO_EMITTER);
@@ -58,11 +62,6 @@ bool ModuleScene::Start()
 	TunnelEffect->AddComponent(ComponentType::AUDIO_REVERB_ZONE);
 	TunnelEffect->SetName("Tunnel Effect");
 	AddGameObject(TunnelEffect);
-
-	background_timer.Start();
-	background_music = false;
-
-	StartSceneAudioEvents();
 
 	return ret;
 }
@@ -88,6 +87,14 @@ update_status ModuleScene::Update(float dt)
 	AudioEmitter* carMusic = (AudioEmitter*)car->GetComponent(ComponentType::AUDIO_EMITTER);
 	AkRtpcValue distanceValue = dis;
 	AKRESULT result = AK::SoundEngine::SetRTPCValue(carMusic->distanceId, distanceValue);*/
+
+	if (App->in_game && sceneInGame == false)
+	{
+		background_timer.Start();
+		background_music = false;
+		StartSceneAudioEvents();
+		sceneInGame = true;
+	}
 
 	root->Update();
 
@@ -328,7 +335,7 @@ void ModuleScene::BackgroundMusicLoop()
 	{
 		if (background_music == false)
 		{
-			AudioEmitter* music = (AudioEmitter*)MusicTest->GetComponent(ComponentType::AUDIO_EMITTER);
+			AudioEmitter* music = (AudioEmitter*)root->GetChildByName("Background Music")->GetComponent(ComponentType::AUDIO_EMITTER);
 			music->SetID(AK::EVENTS::SONG1_TO_2);
 			App->audio->PlayEvent(AK::EVENTS::SONG1_TO_2, music->emitter);
 			background_timer.Start();
@@ -336,7 +343,7 @@ void ModuleScene::BackgroundMusicLoop()
 		}
 		else if (background_music == true)
 		{
-			AudioEmitter* music = (AudioEmitter*)MusicTest->GetComponent(ComponentType::AUDIO_EMITTER);
+			AudioEmitter* music = (AudioEmitter*)root->GetChildByName("Background Music")->GetComponent(ComponentType::AUDIO_EMITTER);
 			music->SetID(AK::EVENTS::SONG2_TO_1);
 			App->audio->PlayEvent(AK::EVENTS::SONG2_TO_1, music->emitter);
 			background_timer.Start();
@@ -347,18 +354,18 @@ void ModuleScene::BackgroundMusicLoop()
 
 void ModuleScene::StartSceneAudioEvents()
 {
-	AudioEmitter* music = (AudioEmitter*)MusicTest->GetComponent(ComponentType::AUDIO_EMITTER);
+	AudioEmitter* music = (AudioEmitter*)root->GetChildByName("Background Music")->GetComponent(ComponentType::AUDIO_EMITTER);
 	music->SetID(AK::EVENTS::START_LOOP);
 	App->audio->PlayEvent(AK::EVENTS::START_LOOP, music->emitter);
-	AudioEmitter* carMusic = (AudioEmitter*)car->GetComponent(ComponentType::AUDIO_EMITTER);
+	AudioEmitter* carMusic = (AudioEmitter*)root->GetChildByName("Car")->GetComponent(ComponentType::AUDIO_EMITTER);
 	carMusic->SetID(AK::EVENTS::PLAYMOVINGOBJ);
 	App->audio->PlayEvent(AK::EVENTS::PLAYMOVINGOBJ, carMusic->emitter);
 }
 
 void ModuleScene::StopSceneAudioEvents()
 {
-	AudioEmitter* music = (AudioEmitter*)MusicTest->GetComponent(ComponentType::AUDIO_EMITTER);
+	AudioEmitter* music = (AudioEmitter*)root->GetChildByName("Background Music")->GetComponent(ComponentType::AUDIO_EMITTER);
 	App->audio->StopEvent(AK::EVENTS::START_LOOP, music->emitter);
-	AudioEmitter* carMusic = (AudioEmitter*)car->GetComponent(ComponentType::AUDIO_EMITTER);
+	AudioEmitter* carMusic = (AudioEmitter*)root->GetChildByName("Car")->GetComponent(ComponentType::AUDIO_EMITTER);
 	App->audio->StopEvent(AK::EVENTS::PLAYMOVINGOBJ, carMusic->emitter);
 }
