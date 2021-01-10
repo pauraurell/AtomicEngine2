@@ -42,10 +42,10 @@ public:
 
 public:
 	std::string name;
+	GameObject* _gameObject;
 
 protected:
 	ComponentType type;
-	GameObject* _gameObject;
 	bool enabled;
 
 	uint _resourceUID;

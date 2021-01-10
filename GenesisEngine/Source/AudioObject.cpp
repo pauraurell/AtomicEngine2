@@ -7,7 +7,6 @@ AudioObject::AudioObject(unsigned __int64 id, const char* name)
 	this->ObjectId = id;
 	this->name = name;
 	AK::SoundEngine::RegisterGameObj(this->ObjectId, this->name);
-	App->audio->audio_objects.push_back(this);
 }
 
 AudioObject::~AudioObject()

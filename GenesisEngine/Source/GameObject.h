@@ -49,7 +49,7 @@ public:
 	int GetChildrenAmount();
 	GameObject* GetChildAt(int index);
 	GameObject* GetChildByName(const char* name);
-	bool RemoveChild(GameObject* gameObject);
+	bool RemoveChild(GameObject* gameObject);                       
 	void DeleteChildren();
 	void UpdateChildrenTransforms();
 

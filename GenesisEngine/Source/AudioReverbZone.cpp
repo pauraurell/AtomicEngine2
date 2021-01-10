@@ -4,6 +4,8 @@
 #include "GameObject.h"
 #include "GnJSON.h"
 #include "Transform.h"
+#include "AudioEmitter.h"
+#include "GameObject.h"
 
 #include "glew/include/glew.h"
 #include "ImGui/imgui.h"
@@ -34,27 +36,27 @@ void AudioReverbZone::Load(GnJSONObj& load_object)
 void AudioReverbZone::Update()
 {
 	Transform* t = (Transform*)_gameObject->GetComponent(ComponentType::TRANSFORM);
-	sphere.pos = t->_position;
-	sphere.r = r;
+	if(t != nullptr) reverb_sphere.pos = t->_position;
+	reverb_sphere.r = r;
 
 	glLineWidth(1.0f);
-	glColor3f(1.0f, 0.0f, 1.0f);
+	if (ContainsSource()) { glColor3f(1.0f, 0.0f, 1.0f); }
+	else { glColor3f(1.0f, 1.0f, 1.0f); }
 
-	float a = (360.f/20.0f) * DEGTORAD;
+	float angle = (360.f / (float)CIRCUMFERENCE_VERTEX);
 
 	glBegin(GL_LINE_LOOP);
-	for (unsigned int i = 0; i < 20; i++)
-		glVertex3f(cos(a * i) * sphere.r + sphere.pos.x, sphere.pos.y, sin(a * i) * sphere.r + sphere.pos.z);
+	for (unsigned int i = 0; i < CIRCUMFERENCE_VERTEX; i++)
+		glVertex3f(cos(angle * DEGTORAD * i) * reverb_sphere.r + reverb_sphere.pos.x, reverb_sphere.pos.y, sin(angle * DEGTORAD * i) * reverb_sphere.r + reverb_sphere.pos.z);
+		glEnd();
+	glBegin(GL_LINE_LOOP);
+	for (unsigned int i = 0; i < CIRCUMFERENCE_VERTEX; i++)
+		glVertex3f(cos(angle * DEGTORAD * i) * reverb_sphere.r + reverb_sphere.pos.x, sin(angle * DEGTORAD * i) * reverb_sphere.r + reverb_sphere.pos.y, reverb_sphere.pos.z);
 	glEnd();
 	glBegin(GL_LINE_LOOP);
-	for (unsigned int i = 0; i < 20; i++)
-		glVertex3f(cos(a * i) * sphere.r + sphere.pos.x, sin(a * i) * sphere.r + sphere.pos.y, sphere.pos.z);
+	for (unsigned int i = 0; i < CIRCUMFERENCE_VERTEX; i++)
+		glVertex3f(reverb_sphere.pos.x, sin(angle * DEGTORAD * i) * reverb_sphere.r + reverb_sphere.pos.y, cos(angle * DEGTORAD * i) * reverb_sphere.r + reverb_sphere.pos.z);
 	glEnd();
-	glBegin(GL_LINE_LOOP);
-	for (unsigned int i = 0; i < 20; i++)
-		glVertex3f(sphere.pos.x, sin(a * i) * sphere.r + sphere.pos.y, cos(a * i) * sphere.r + sphere.pos.z);
-	glEnd();
-
 }
 
 void AudioReverbZone::OnEditor()
@@ -63,4 +65,24 @@ void AudioReverbZone::OnEditor()
 	{
 		ImGui::DragFloat("Radius", &r, 0.1, 0, 50);
 	}
+}
+
+bool AudioReverbZone::ContainsSource()
+{
+	bool ret = false;
+
+	for (int i = 0; i < App->audio->audio_emitters.size(); i++)
+	{
+		Transform* transform = (Transform*)App->audio->audio_emitters[i]->_gameObject->GetComponent(ComponentType::TRANSFORM);
+		if (transform != nullptr) 
+		{
+			float3 point = transform->GetPosition();
+			//const char* name = App->audio->audio_emitters[i]->_gameObject->name.c_str();
+			if (reverb_sphere.Contains(point)) 
+			{ 
+				ret = true; 
+			}
+		}
+	}
+	return ret;
 }

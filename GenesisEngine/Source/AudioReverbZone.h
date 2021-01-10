@@ -4,6 +4,8 @@
 #include <vector>;
 #include "MathGeoLib\include\MathGeoLib.h"
 
+#define CIRCUMFERENCE_VERTEX 20.0f //Num of vertices that will have each line loop of the sphere
+
 class AudioReverbZone : public Component {
 public:
 	AudioReverbZone(GameObject* gameObject);
@@ -15,7 +17,8 @@ public:
 	virtual void Update() override;
 	virtual void OnEditor() override;
 
+	bool ContainsSource();
+
 	float r;
-	math::Sphere sphere;
-	math::Rect rect;
+	math::Sphere reverb_sphere;
 };

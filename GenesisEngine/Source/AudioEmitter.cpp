@@ -4,6 +4,7 @@
 #include "GameObject.h"
 #include "GnJSON.h"
 #include "Transform.h"
+#include "ModuleAudio.h"
 
 #include "glew/include/glew.h"
 #include "ImGui/imgui.h"
@@ -22,11 +23,19 @@ AudioEmitter::AudioEmitter(GameObject* gameObject) : Component(gameObject)
 	emitter = App->audio->CreateSource(gameObject);
 	/*float3 Position = _gameObject->GetTransform()->GetPosition();
 	emitter = App->audio->CreateSoundObj(gameObject->UUID, gameObject->name.c_str(), Position.x, Position.y, Position.z);*/
+	App->audio->audio_emitters.push_back(this);
 	LOG("Audio Emitter Component created for %s", _gameObject->GetName())
 }
 
 AudioEmitter::~AudioEmitter()
 {
+	for (int i = 0; i < App->audio->audio_emitters.size(); i++)
+	{
+		if (App->audio->audio_emitters[i]->name == this->name)
+		{
+			App->audio->audio_emitters.erase(App->audio->audio_emitters.begin() + i);
+		}
+	}
 	emitter->DeleteObject();
 }
 
@@ -62,6 +71,15 @@ void AudioEmitter::Update()
 	Position.z = -Position.z;
 	emitter->SetPos(Position, { 1,0,0 }, {0,1,0});
 	//_gameObject->GetTransform()->SetPosition(Position.x, Position.y, Position.z);
+
+	if (mute)
+	{
+		AK::SoundEngine::SetGameObjectOutputBusVolume(emitter->ObjectId, AK_INVALID_GAME_OBJECT, 0);
+	}
+	else
+	{
+		AK::SoundEngine::SetGameObjectOutputBusVolume(emitter->ObjectId, AK_INVALID_GAME_OBJECT, emitter->volume);
+	}
 }
 
 void AudioEmitter::OnEditor()
@@ -74,9 +92,7 @@ void AudioEmitter::OnEditor()
 		ImGui::Spacing();
 		
 		if(ImGui::Checkbox("Mute", &mute))
-		{
-			emitter->SetVolume(id, 0);
-		}
+
 		ImGui::Checkbox("Loop", &loop);
 		ImGui::Checkbox("Bypass Reverb Zones", &bypass_reverb_zones);
 
