@@ -62,6 +62,15 @@ void AudioEmitter::Update()
 	Position.z = -Position.z;
 	emitter->SetPos(Position, { 1,0,0 }, {0,1,0});
 	//_gameObject->GetTransform()->SetPosition(Position.x, Position.y, Position.z);
+
+	if (mute)
+	{
+		AK::SoundEngine::SetGameObjectOutputBusVolume(emitter->ObjectId, AK_INVALID_GAME_OBJECT, 0);
+	}
+	else
+	{
+		AK::SoundEngine::SetGameObjectOutputBusVolume(emitter->ObjectId, AK_INVALID_GAME_OBJECT, emitter->volume);
+	}
 }
 
 void AudioEmitter::OnEditor()
@@ -74,9 +83,7 @@ void AudioEmitter::OnEditor()
 		ImGui::Spacing();
 		
 		if(ImGui::Checkbox("Mute", &mute))
-		{
-			emitter->SetVolume(id, 0);
-		}
+
 		ImGui::Checkbox("Loop", &loop);
 		ImGui::Checkbox("Bypass Reverb Zones", &bypass_reverb_zones);
 

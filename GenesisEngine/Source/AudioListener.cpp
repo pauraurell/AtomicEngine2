@@ -5,6 +5,7 @@
 #include "GnJSON.h"
 #include "Transform.h"
 #include "Camera.h"
+#include "ModuleWwise.h"
 
 #include "glew/include/glew.h"
 #include "ImGui/imgui.h"
@@ -42,12 +43,15 @@ void AudioListener::Update()
 	float3 front = App->camera->GetCamera()->GetFrustum().front;
 	float3 up = App->camera->GetCamera()->GetFrustum().up;
 	listener->SetPos(position, front, up);
+
+	if (enabled == false) { AK::SoundEngine::RemoveDefaultListener(listener->ObjectId); }
+	else { AK::SoundEngine::SetDefaultListeners(&listener->ObjectId, 1); }
 }
 
 void AudioListener::OnEditor()
 {
 	if (ImGui::CollapsingHeader("Audio Listener", ImGuiTreeNodeFlags_DefaultOpen))
 	{
-
+		if (ImGui::Checkbox("Enable", &enabled));
 	}
 }

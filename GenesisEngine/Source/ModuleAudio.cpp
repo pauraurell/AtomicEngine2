@@ -69,7 +69,6 @@ AudioObject* ModuleAudio::CreateListener(GameObject* go)
 {
 	AudioObject* new_listenerObj = new AudioObject(go->UUID, go->GetName());
 	AkGameObjectID listenerID = new_listenerObj->GetId();
-	AK::SoundEngine::SetDefaultListeners(&listenerID, 1);
 	new_listenerObj->SetPos(go->GetTransform()->GetPosition(), { 1,0,0 }, { 0,1,0 });
 	return new_listenerObj;
 }
