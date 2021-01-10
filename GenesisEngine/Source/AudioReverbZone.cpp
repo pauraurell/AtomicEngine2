@@ -57,6 +57,8 @@ void AudioReverbZone::Update()
 	for (unsigned int i = 0; i < CIRCUMFERENCE_VERTEX; i++)
 		glVertex3f(reverb_sphere.pos.x, sin(angle * DEGTORAD * i) * reverb_sphere.r + reverb_sphere.pos.y, cos(angle * DEGTORAD * i) * reverb_sphere.r + reverb_sphere.pos.z);
 	glEnd();
+
+	glColor3f(1.0f, 1.0f, 1.0f);
 }
 
 void AudioReverbZone::OnEditor()

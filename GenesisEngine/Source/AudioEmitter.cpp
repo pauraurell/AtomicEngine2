@@ -36,6 +36,7 @@ AudioEmitter::~AudioEmitter()
 			App->audio->audio_emitters.erase(App->audio->audio_emitters.begin() + i);
 		}
 	}
+	App->audio->StopEvent(id, emitter);
 	emitter->DeleteObject();
 }
 

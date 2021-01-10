@@ -333,8 +333,11 @@ GameObject* GameObject::GetChildByName(const char* name )
 		if (children[i]->name == name) 
 		{
 			return children[i];
+			break;
 		}
 	}
+
+	return nullptr;
 }
 
 GameObject* GameObject::GetParent()
