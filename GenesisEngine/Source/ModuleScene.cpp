@@ -100,7 +100,7 @@ update_status ModuleScene::Update(float dt)
 
 	BackgroundMusicLoop();
 
-	//if (App->in_game) { MoveObject(car, 0.1); }
+	if (App->in_game) { MoveObject(root->GetChildByName("Car"), 0.1); }
 
 	return UPDATE_CONTINUE;
 }
