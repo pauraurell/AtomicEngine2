@@ -7,10 +7,11 @@ We forked Marc Pagès's Genesis Engine as starting point for this assignment.
 ## Who are we?
 
 ### [Pau Raurell](https://github.com/pauraurell)
-![Photo]()
-
 ### [Pol Galan(https://github.com/pgalmor)
-![Photo]()
+![Photo](https://github.com/pauraurell/AtomicEngine2/blob/gh-pages/Web%20pics/Members.PNG)
+
+Pau Raurell contributions: Wwise integration, Module Audio, Audio Components, Reverb (code),
+Pol Galan contributions: Spatial Audio, Background music loop, Reverb (Wwise),
 
 ## Sub-systems
 
