@@ -27,3 +27,37 @@ Then we have the Listener component, without this one the audio that comes from 
 The last one is the Reverb Zone and it is a sphere that if contains a Audio Emitter, the sound from that emitter gets reverbed more or less depending on 
 the distance to the center of the sphere.
 In the demo scene there are two game objects with spatial audio, a background music and a reverb zone. 
+
+![gif1](https://github.com/pauraurell/AtomicEngine2/blob/gh-pages/Web%20pics/gif1.gif)
+![gif2](https://github.com/pauraurell/AtomicEngine2/blob/gh-pages/Web%20pics/gif2.gif)
+
+## Demo Video
+[![IMG](https://img.youtube.com/vi/YJ7yxsC5ZrA/0.jpg)](https://www.youtube.com/watch?v=YJ7yxsC5ZrA)
+
+##Release
+Atomic Engine 2 v1.0 Release: https://github.com/pauraurell/AtomicEngine2/releases/tag/v1.0
+
+##Licence
+
+MIT License
+
+Copyright (c) 2020 Pol Galan Morales & Pau Raurell Gomis
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files Genesis Engine, to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
