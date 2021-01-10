@@ -31,7 +31,7 @@ AudioEmitter::~AudioEmitter()
 {
 	for (int i = 0; i < App->audio->audio_emitters.size(); i++)
 	{
-		if (App->audio->audio_emitters[i]->name == this->name)
+		if (App->audio->audio_emitters[i]->emitter->ObjectId == this->emitter->ObjectId)
 		{
 			App->audio->audio_emitters.erase(App->audio->audio_emitters.begin() + i);
 		}
