@@ -13,8 +13,10 @@ namespace AK
 {
     namespace EVENTS
     {
+        static const AkUniqueID PAUSEALL = 4091047182U;
         static const AkUniqueID PLAYMOVINGOBJ = 3277656012U;
         static const AkUniqueID PLAYSTATICOBJ = 4290004840U;
+        static const AkUniqueID RESUMEALL = 3240900869U;
         static const AkUniqueID SETREVERBOFF = 239574670U;
         static const AkUniqueID SETREVERBON = 2297615984U;
         static const AkUniqueID SONG1_TO_2 = 655376382U;

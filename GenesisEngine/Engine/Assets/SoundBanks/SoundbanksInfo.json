@@ -101,6 +101,16 @@
     "Path": "Atomic3.bnk",
     "IncludedEvents": [
      {
+      "Id": "4091047182",
+      "Name": "PauseAll",
+      "ObjectPath": "\\Events\\Default Work Unit\\PauseAll"
+     },
+     {
+      "Id": "3240900869",
+      "Name": "ResumeAll",
+      "ObjectPath": "\\Events\\Default Work Unit\\ResumeAll"
+     },
+     {
       "Id": "239574670",
       "Name": "SetReverbOff",
       "ObjectPath": "\\Events\\Default Work Unit\\SetReverbOff"

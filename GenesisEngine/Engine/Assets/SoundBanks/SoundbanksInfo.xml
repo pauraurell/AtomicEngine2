@@ -60,6 +60,8 @@
 			<ShortName>Atomic3</ShortName>
 			<Path>Atomic3.bnk</Path>
 			<IncludedEvents>
+				<Event Id="4091047182" Name="PauseAll" ObjectPath="\Events\Default Work Unit\PauseAll"/>
+				<Event Id="3240900869" Name="ResumeAll" ObjectPath="\Events\Default Work Unit\ResumeAll"/>
 				<Event Id="239574670" Name="SetReverbOff" ObjectPath="\Events\Default Work Unit\SetReverbOff"/>
 				<Event Id="2297615984" Name="SetReverbOn" ObjectPath="\Events\Default Work Unit\SetReverbOn"/>
 			</IncludedEvents>
